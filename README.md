@@ -10,8 +10,18 @@ Repo for CyberphisicalSystem course of UNIPD
 3. store the new data into cache -> ionic storage
 4. show data
 
+## HTTP packet
+
+```JSON
+{
+    "timestamp":datetime,
+    "message":varchar/text
+}
+````
+
 
 ## TODO
 
 [] save message to cache
 [] push notification for new data
+[X] server python
