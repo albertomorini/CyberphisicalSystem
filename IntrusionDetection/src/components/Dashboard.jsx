@@ -8,6 +8,13 @@ const Dashboard = () => {
     function getData() {
         setTimeout(() => {
 
+            fetch("http://localhost:1199", {
+                mode: "cors",
+                method: "GET"
+            }).then(res => res.text()).then(res => {
+                console.log(res);
+            })
+
             let x = Array.from(Array(15).keys());
             console.log(x);
             setMessages([...Messages, ...x])
