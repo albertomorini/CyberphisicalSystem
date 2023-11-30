@@ -1,7 +1,18 @@
 {
   "name": "IntrusionDetection",
   "integrations": {
-    "capacitor": {}
+    "capacitor": {
+        "plugins": {
+          "PushNotifications": {
+            "presentationOptions": [
+              "badge",
+              "sound",
+              "alert"
+            ]
+          }
+        }
+
+    }
   },
   "type": "react-vite"
 }
