@@ -13,15 +13,21 @@ Repo for CyberphisicalSystem course of UNIPD
 ## HTTP packet
 
 ```JSON
-{
-    "timestamp":datetime,
-    "message":varchar/text
+*{
+    'timestamp': '....',
+    'msg_length': int'
+    'msg': '...',
+    'id': '...',
+    'kind': "Sospicious/Unknown",
+    'dataset': String
 }
 ````
 
 
 ## TODO
 
-[] save message to cache
-[] push notification for new data
+[x] save message to cache
+
+[x] push notification for new data
+
 [X] server python

@@ -1,6 +1,6 @@
 import json
 from http.server import BaseHTTPRequestHandler, HTTPServer
-PORT = 1199
+PORT = 1999
 
 # a Python object (dict):
 message = {
@@ -10,6 +10,7 @@ message = {
 message["data"].append({
   "timestamp": "2023/11/30 12:32:33",
   "message": "malicious detection",
+  "kind": "ATTACK"
 })
 
 
