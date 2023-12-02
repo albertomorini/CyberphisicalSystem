@@ -50,7 +50,6 @@ def generate_matrix(ids):
         boolean_matrix[row_index][column_index] = True
 
     return boolean_matrix, auxiliary_ids
-
 def analyze_traffic(matrix, ids, dataset):
     """
     :matrix
@@ -71,22 +70,24 @@ def analyze_traffic(matrix, ids, dataset):
     batch_size = 2000
     saved_msg = []
     id_to_be_saved = []
+
     for i in range(0, len(dataset)-1):
         if counter == batch_size:
-            error_ratio = (threat_len/batch_size)
+            error_ratio = threat_len / batch_size
             if error_ratio > 0.1:
                 print(error_ratio)
-                # Put error into attacks
-                for timestamp, id, msg_length, msg in batch_threat[0]:
+                # Metti l'errore negli attacchi
+                for timestamp, id, msg_length, msg in batch_threat:
                     json = {
                         "timestamp": timestamp,
                         "msg_length": msg_length,
                         "msg": msg,
                         "id": id,
                         "kind": "ATTACK"
-                    }    
+                    }
+                    saved_msg.append(json)
             else:
-                for timestamp, id, msg_length, msg in batch_threat[1]:
+                for timestamp, id, msg_length, msg in batch_threat:
                     json = {
                         "timestamp": timestamp,
                         "msg_length": msg_length,
@@ -94,46 +95,52 @@ def analyze_traffic(matrix, ids, dataset):
                         "id": id,
                         "kind": "UNKNOWN"
                     }
-                matrix = update_matrix(matrix, ids,batch_threat, id_to_be_saved)
+                    saved_msg.append(json)
+                matrix = update_matrix(matrix, ids, batch_threat, id_to_be_saved)
 
             saved_msg.append(json)
             id_to_be_saved = []
             batch_threat = []
             counter = 0
             threat_len = 0
+
         actual_id = dataset[i][1]
-        next_id = dataset[i+1]
+        next_id = dataset[i+1][1]
 
         if actual_id not in ids or next_id not in ids:
-            threat_len = threat_len+1
-            batch_threat.append([dataset[i], dataset[i+1]])
+            threat_len += 1
+            batch_threat.append(dataset[i])
+            batch_threat.append(dataset[i+1])
             if actual_id not in ids:
                 id_to_be_saved.append(actual_id)
             if next_id not in ids:
                 id_to_be_saved.append(next_id)
         else:
-            row = ids.index(dataset[i][1])
-            column = ids.index(dataset[i+1][1])
-            
+            row = ids.index(actual_id)
+            column = ids.index(next_id)
+
             if not matrix[row][column]:
-                threath_len = threath_len + 1
-                batch_threat.append([dataset[i], dataset[i+1]])
-        counter = counter + 1
+                threat_len += 1
+                batch_threat.append(dataset[i])
+                batch_threat.append(dataset[i+1])
+
+        counter += 1
+
     return saved_msg
 
-def update_matrix(matrix, ids,dataset, adding_ids):
 
-    ids = ids.append(adding_ids)
+def update_matrix(matrix, ids, dataset, adding_ids):
+    ids += adding_ids
 
     for _ in range(len(adding_ids)):
-        matrix.append(False * len(matrix[0]))
-    
-    for _ in range(len(adding_ids)):
-        matrix[_].extend(False * len(adding_ids))
+        matrix.append([False] * len(matrix[0]))
 
-    for i in range(len(dataset)-1):
-        row = ids.index(dataset[0][i][1])
-        column = ids.index(dataset[1][i][1])
+    for _ in range(len(adding_ids)):
+        matrix[_].extend([False] * len(adding_ids))
+
+    for i in range(0, len(dataset)-1, 2):
+        row = ids.index(dataset[i][1])
+        column = ids.index(dataset[i+1][1])
         matrix[row][column] = True
-    
+
     return matrix
