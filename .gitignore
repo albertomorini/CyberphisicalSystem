@@ -131,3 +131,4 @@ dist
 /dataset/*
 !dataset/README.md
 __pycache__
+/results
