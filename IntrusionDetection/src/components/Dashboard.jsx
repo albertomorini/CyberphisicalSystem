@@ -3,49 +3,13 @@ import { useEffect, useState } from 'react';
 import moment from "moment"
 
 import { Storage } from '@ionic/storage';
-import { PushNotifications } from '@capacitor/push-notifications';
 
+import { LocalNotifications } from '@capacitor/local-notifications';
 
 const Dashboard= () => {
     const [Messages, setMessages] = useState([]);
     const store = new Storage();
 
-    const addListeners = async () => {
-        await PushNotifications.addListener('registration', token => {
-            console.info('Registration token: ', token.value);
-        });
-
-        await PushNotifications.addListener('registrationError', err => {
-            console.error('Registration error: ', err.error);
-        });
-
-        await PushNotifications.addListener('pushNotificationReceived', notification => {
-            console.log('Push notification received: ', notification);
-        });
-
-        await PushNotifications.addListener('pushNotificationActionPerformed', notification => {
-            console.log('Push notification action performed', notification.actionId, notification.inputValue);
-        });
-    }
-
-    const registerNotifications = async () => {
-        let permStatus = await PushNotifications.checkPermissions();
-
-        if (permStatus.receive === 'prompt') {
-            permStatus = await PushNotifications.requestPermissions();
-        }
-
-        if (permStatus.receive !== 'granted') {
-            throw new Error('User denied permissions!');
-        }
-
-        await PushNotifications.register();
-    }
-
-    const getDeliveredNotifications = async () => {
-        const notificationList = await PushNotifications.getDeliveredNotifications();
-        console.log('delivered notifications', notificationList);
-    }
 
     async function getData() {
         //await store.create();
@@ -63,11 +27,29 @@ const Dashboard= () => {
 
         }, 2000);
     }
+    async function test(){
+        console.log("clieckd");
+        let options = {
+                notifications: [
+                    {
+                        id: 111,
+                        title: "TEST",
+                        body: "corpo"
+                    }
+                ]
+            }
+            try {
+                await LocalNotifications.schedule(options)
+            } catch (ex) {
+                console.log(ex);
+            }
+        console.log("clieckd");
+
+    }
+   
 
     useEffect(() => {
-        addListeners();
-        registerNotifications();
-        getDeliveredNotifications();
+        
         getData();
     }, [])
 
@@ -95,7 +77,7 @@ const Dashboard= () => {
                 ))}
             </IonContent>
 
-            <IonButton color="danger" expand='block'>Clear cache</IonButton>
+            <IonButton color="danger" expand='block' onClick={()=>test()}>Clear cache</IonButton>
             <h3 className='ion-text-center'>
                 Made by Alberto Morini & Davide Bassan
             </h3>
