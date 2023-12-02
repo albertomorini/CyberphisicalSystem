@@ -67,14 +67,14 @@ def analyze_traffic(matrix, ids, dataset):
     threat_len = 0
     counter = 0
     batch_threat = []
-    batch_size = 2000
+    batch_size = 100
     saved_msg = []
     id_to_be_saved = []
 
     for i in range(0, len(dataset)-1):
         if counter == batch_size:
             error_ratio = threat_len / batch_size
-            if error_ratio > 0.1:
+            if error_ratio >= 0.05:
                 print(error_ratio)
                 # Metti l'errore negli attacchi
                 for timestamp, id, msg_length, msg in batch_threat:
@@ -96,9 +96,9 @@ def analyze_traffic(matrix, ids, dataset):
                         "kind": "UNKNOWN"
                     }
                     saved_msg.append(json)
-                matrix = update_matrix(matrix, ids, batch_threat, id_to_be_saved)
-
-            saved_msg.append(json)
+                if error_ratio < 0.02:
+                    matrix = update_matrix(matrix, ids, batch_threat, id_to_be_saved)
+                
             id_to_be_saved = []
             batch_threat = []
             counter = 0
@@ -110,7 +110,6 @@ def analyze_traffic(matrix, ids, dataset):
         if actual_id not in ids or next_id not in ids:
             threat_len += 1
             batch_threat.append(dataset[i])
-            batch_threat.append(dataset[i+1])
             if actual_id not in ids:
                 id_to_be_saved.append(actual_id)
             if next_id not in ids:
@@ -122,8 +121,7 @@ def analyze_traffic(matrix, ids, dataset):
             if not matrix[row][column]:
                 threat_len += 1
                 batch_threat.append(dataset[i])
-                batch_threat.append(dataset[i+1])
-
+                
         counter += 1
 
     return saved_msg
