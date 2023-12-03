@@ -11,7 +11,9 @@ Replication of first paper -  IDS for CAN: A Practical Intrusion Detection Syste
 - Alberto Morini (mat. 2107783)
 
 
-## Panoramic
+## Abstract
+
+![Alt text](images/flowchart.jpg)
 
 - un paio di parole su quello che dobbiamo fare (replicare l'algoritmo e app)
 - inserisco uno schemino/flusso concettuale
