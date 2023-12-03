@@ -1,6 +1,6 @@
-import { IonButton, IonCol, IonContent, IonInput, IonItem, IonLabel, IonRow, IonText } from '@ionic/react';
+import { IonButton, IonCol, IonContent, IonInput, IonItem, IonLabel, IonRow } from '@ionic/react';
 import { useEffect, useState } from 'react';
-import moment from "moment"
+import moment from "moment";
 import { Storage } from '@ionic/storage';
 import { LocalNotifications } from '@capacitor/local-notifications';
 
@@ -40,7 +40,7 @@ const Dashboard = () => {
             console.log(ex);
         }
     }
-
+    //FETCH server to retreive new detections
     async function getDataFromServer() {
         const store = new Storage();
         store.create();
@@ -62,6 +62,9 @@ const Dashboard = () => {
             const store = new Storage();
             store.create();
             let arrayStorico = await store.get('historyData');
+            if(arrayStorico==null){
+                arrayStorico=[];
+            }
             let tmpArray = Array.from(arrayStorico).concat(res.data); //cast into a proper array
             store.set('historyData', tmpArray); //save new array with oldData.append(newData) --> where newData is an array of detection
 
@@ -71,6 +74,7 @@ const Dashboard = () => {
             alert("Communication error: " + err);
         });
     }
+    // clean history cache of detections
     function cleanCache() {
         console.log("Cleaning cache");
         const store = new Storage();
@@ -78,14 +82,20 @@ const Dashboard = () => {
         store.set('historyData', []);; //set an empty array
         setMessages([])
     }
-
+    // Store socket server into cache
     function storeSocketServer(){
         const store = new Storage();
         store.create();
         store.set("socketServer",SocketServer);
     }
 
+    function checkPermissions(){
+        //TODO: check if already asked
+        LocalNotifications.requestPermissions();
+    }
+
     useEffect(() => {
+        checkPermissions();
        getDataFromServer();
         setInterval(() => {
             getDataFromServer();
