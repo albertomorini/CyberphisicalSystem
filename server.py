@@ -1,6 +1,7 @@
 import json
 from http.server import BaseHTTPRequestHandler, HTTPServer
 import DetectionAlgorithm
+import sys
 PORT = 1999
 ######################################################
 
@@ -10,6 +11,7 @@ PORT = 1999
 def detectionPhases(limitDetections):
     ids = DetectionAlgorithm.extract_id('./dataset/Attack_free_dataset.txt')
     matrix, aux_ids = DetectionAlgorithm.generate_matrix(ids)
+    print("IDS of CAN-BUS:")
     print(aux_ids) ## unique IDS
 
     datasetExtractions = {
@@ -74,6 +76,11 @@ def startServer():
     httpd.serve_forever()
         
 
+if(len(sys.argv)>1):
+    print("Picked: "+sys.argv[1]+ " detection messages")
+    detections = detectionPhases(sys.argv[1]) #limit to n-message for each attack
+else:   
+    print("Default case, 10 detection messages")
+    detections = detectionPhases(10) #limit to 10 message for each attack
 
-detections = detectionPhases(10) #limit to 10 message for each attack
 startServer()
