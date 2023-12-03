@@ -64,7 +64,11 @@ Of course, HTTP is an ensecure protocol, we adopt it just for an easily approach
 
 ```JSON
 {
-    
+    "timestamp": integer,
+    "msg_length": int,
+    "msg": "VARCHAR",
+    "id": id_CANComponent,
+    "kind": "Sospicious/Unknown"
 }
 ```
 
