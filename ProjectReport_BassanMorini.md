@@ -43,6 +43,8 @@ The **frontend** is a web application made with <a href="https://ionicframework.
 - *Building and testing has been made with Ionic 7.1.1*
 - *Android 14 (5 sept 2023) and API34 emulated in Android Studio Giraffe 2022.3.1 Patch 2*
 
+<div style="page-break-after: always;"></div>
+
 ## Intrusion detection side (backend)
 
 ### Creation of the matrix
@@ -141,6 +143,7 @@ def update_matrix(matrix, ids, dataset, adding_ids):
     return matrix
 ```
 
+<div style="page-break-after: always;"></div>
 
 ## Mobile app
 
