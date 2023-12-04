@@ -16,6 +16,16 @@ Replication of first paper - IDS for CAN: A Practical Intrusion Detection System
 **ALL SOURCE CODE IS PUBLIC ON GITHUB (in various branch)**: https://github.com/albertomorini/CyberphisicalSystem <br/>
 _For storage reasons we do not provide the datasets of the paper in this repository_
 
+## Table of contents
+
+1. [Abstract](#Abstract)
+2. [Detection algorithm](#Intrusion-detection-side)
+3. [Mobile app](#Mobile-App)
+4. [Conclusions](#Conclusions)
+
+
+<div style="page-break-after: always;"></div>
+
 
 ## Abstract
 
@@ -45,7 +55,7 @@ The **frontend** is a web application made with <a href="https://ionicframework.
 
 <div style="page-break-after: always;"></div>
 
-## Intrusion detection side (backend)
+## Intrusion detection side
 
 ### Creation of the matrix
 In this phase, we have replicated the algorithm proposed in the paper.
@@ -272,13 +282,11 @@ async function showLocalNotification(id, kindMessage = "NODATA", CANMessage) {
         }
 
         let options = {
-            notifications: [
-                {
-                    id: id,
-                    title: "ALERT: potential attack detect!",
-                    body: tmpBody + "\n CAN MESSAGE: " + CANMessage
-                }
-            ]
+            notifications: [{
+                id: id,
+                title: "ALERT: potential attack detect!",
+                body: tmpBody + "\n CAN MESSAGE: " + CANMessage
+            }]
         }
 
         try {
@@ -289,11 +297,11 @@ async function showLocalNotification(id, kindMessage = "NODATA", CANMessage) {
     }
 ```
 
-Detections have a red background in case of "Attack" and light grey if are identified the threat as "Unusual traffic".
-*See it in Fig2*
+Detections have a red background in case of "Attack" and light grey if are identified the threat as "Unusual traffic". (*See it in Fig2*)
+
 <div style="page-break-after: always;"></div>
 
-## Conclusion
+## Conclusions
 
 In conclusion, some critical thought about the system created:
 
