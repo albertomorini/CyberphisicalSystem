@@ -16,6 +16,7 @@
             android:label="@string/title_activity_main"
             android:theme="@style/AppTheme.NoActionBarLaunch"
             android:launchMode="singleTask"
+            android:usesCleartextTraffic="true"
             android:exported="true">
 
             <intent-filter>
@@ -32,14 +33,13 @@
             android:usesCleartextTraffic="true"
             android:grantUriPermissions="true">
             <meta-data
-                android:usesCleartextTraffic="true"
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths"></meta-data>
         </provider>
     </application>
 
     <!-- Permissions -->
-
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
 </manifest>

@@ -6,7 +6,7 @@ import { LocalNotifications } from '@capacitor/local-notifications';
 
 const Dashboard = () => {
     const [Messages, setMessages] = useState([{}]); //to show messages in UI
-    const [SocketServer,setSocketServer] = useState("http://localhost:1199")
+    const [SocketServer, setSocketServer] = useState("http://localhost:1199")
     const store = new Storage(); //to store data into cache
     const pollingTime = 5000; //5 sec;
 
@@ -50,13 +50,21 @@ const Dashboard = () => {
             mode: "cors",
             method: "GET"
         }).then(res => res.json()).then(async res => {
+            if (res.data != "null") { //Server will send null string when ended the detections
+                //DATA RECEIVED
+                showLocalNotification(res.data.id, res.data.kind, res.data.msg); //trigger the android notification
 
-            //DATA RECEIVED
-            res.data.forEach(message => { //res.data is an array of message, forEach one show a notification
-                showLocalNotification(message.id, message.kind, message.msg); //trigger the android notification
+                res.data.receptionTS = moment().format("DD/MM/YYYY HH:mm:ss"); //baptize the reception timestamp
 
-                message.receptionTS = moment().format("DD/MM/YYYY HH:mm:ss"); //baptize the reception timestamp
-            })
+                // STORE DATA INTO CACHE AND UPDATE UI            
+                const store = new Storage();
+                store.create();
+                let arrayStorico = await store.get('historyData');
+                if(arrayStorico == null){
+                    arrayStorico=[]
+                }
+                let tmpArray = Array.from(arrayStorico).concat(res.data); //cast into a proper array
+                store.set('historyData', tmpArray); //save new array with oldData.append(newData) --> where newData is an array of detection
 
             // STORE DATA INTO CACHE AND UPDATE UI            
             const store = new Storage();
@@ -68,10 +76,8 @@ const Dashboard = () => {
             let tmpArray = Array.from(arrayStorico).concat(res.data); //cast into a proper array
             store.set('historyData', tmpArray); //save new array with oldData.append(newData) --> where newData is an array of detection
 
-            setMessages(arrayStorico); //update state to show into UI
-
-        }).catch(err => {
-            alert("Communication error: " + err);
+        }).catch(err => { //visible with logcat
+            console.log("Communication error: " + err);
         });
     }
     // clean history cache of detections
@@ -86,7 +92,22 @@ const Dashboard = () => {
     function storeSocketServer(){
         const store = new Storage();
         store.create();
-        store.set("socketServer",SocketServer);
+        store.set("socketServer", SocketServer);
+    }
+    /**
+     * ASK Permission for local notification
+     */
+    async function askPermissionLN(){
+
+        let x = await LocalNotifications.requestPermissions();
+
+
+        let chkPermission = await LocalNotifications.checkPermissions();
+        console.log("PERMISSION: "+chkPermission);
+        console.log(chkPermission);
+        if (chkPermission == null || chkPermission == "prompt-with-rationale" || chkPermission == "prompt"){ //user have to choiche
+            LocalNotifications.requestPermissions();
+        }
     }
 
     function checkPermissions(){
@@ -123,6 +144,8 @@ const Dashboard = () => {
                             </IonCol>
                             <IonCol>
                                 {s.kind}
+                                <br />
+                                {s.msg}
                             </IonCol>
                             <IonCol>
                                 {s.dataset}
@@ -132,11 +155,11 @@ const Dashboard = () => {
                 ))}
             </IonContent>
 
-
+            <IonItemDivider />
             <IonRow>
                 <IonCol>
-                    <IonLabel>Server</IonLabel>
-                    <IonInput  type='text' fill='outline' placeholder='http://localhost:1199' onIonInput={(ev)=>setSocketServer(ev.target.value)}/>
+                    <IonLabel>Server config</IonLabel>
+                    <IonInput  mode='md' type='text' fill='outline' placeholder='http://localhost:1199' onIonInput={(ev) => setSocketServer(ev.target.value)} />
                 </IonCol>
                 <IonCol size='2'>
                     <IonButton style={{ marginTop: "20px", height: "70%" }} expand='block' color="success" onClick={() => storeSocketServer()}>SAVE</IonButton>
@@ -144,7 +167,7 @@ const Dashboard = () => {
             </IonRow>
 
 
-            <IonButton color="danger" expand='block' onClick={() => cleanCache()}>Clear cache</IonButton>
+            <IonButton color="warning" expand='block' onClick={() => cleanCache()}>Clear cache</IonButton>
             <h3 className='ion-text-center'>
                 Made by Alberto Morini & Davide Bassan
             </h3>
