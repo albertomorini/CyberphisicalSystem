@@ -88,6 +88,8 @@ def generate_matrix(ids):
 
     return boolean_matrix, auxiliary_ids
 ```
+<div style="page-break-after: always;"></div>
+
 
 ### Threat detection
 We have evaluated the algorithm on three different subset of frames
@@ -124,6 +126,7 @@ If the ID does not exist in the matrix, or if the value in the matrix is `False`
 We have divided the evaluation in batch, in order to calculate a BATCH_RATIO of threat, we have also fixed a threshold, in order to ignore false positives.
 
 In fact, if a batch have a BATCH_RATIO lower than a certain threshold we have considered those messages as false positives, and instead of notify the users of potentially unknown messages, we have update the matrix setting to true those false positives.
+<div style="page-break-after: always;"></div>
 
 ```python
 def update_matrix(matrix, ids, dataset, adding_ids):
@@ -197,6 +200,8 @@ For example: `$ python3 server.py 5` --> will send 15 packet in total to the cli
 ![DifferentDatasets](images/differentDataset.png)
 _Fig2: Entire system running_
 
+<div style="page-break-after: always;"></div>
+
 #### Adding the dataset
 
 Server also add the current dataset into the detections:
@@ -241,6 +246,8 @@ Also at every new data, apps push int the notification center of Android the new
 ![NotificationBar](images/notificationBar.png)
 _Fig5: The notification message in the notification bar_
 
+<div style="page-break-after: always;"></div>
+
 #### Messages
 
 At every detection received, client baptize the message with a timestamp called "receptionTS". This information can be very useful in future thus to measure potential delay/latency of the system.
@@ -284,6 +291,7 @@ async function showLocalNotification(id, kindMessage = "NODATA", CANMessage) {
 
 Detections have a red background in case of "Attack" and light grey if are identified the threat as "Unusual traffic".
 *See it in Fig2*
+<div style="page-break-after: always;"></div>
 
 ## Conclusion
 
