@@ -1,6 +1,6 @@
 # Project report
 
-> First project of Cyberphysical System and IoT Security - <a href="https://www.unipd.it/en/educational-offer/second-cycle-degree/science?tipo=LM&scuola=SC&ordinamento=2021&key=SC2598&cg=science">*Master degree in Computer Science* </a>
+> First project of Cyber Physical System and IoT Security (course of Cybersecurity) - <a href="https://www.unipd.it/en/educational-offer/second-cycle-degree/science?tipo=LM&scuola=SC&ordinamento=2021&key=SC2598&cg=science">*Master degree in Computer Science* </a> 
 
 Replication of first paper - IDS for CAN: A Practical Intrusion Detection System for CAN Bus Security
 
@@ -14,21 +14,21 @@ Replication of first paper - IDS for CAN: A Practical Intrusion Detection System
 **Date:** 02 December 2023
 
 **ALL SOURCE CODE IS PUBLIC ON GITHUB (in various branch)**: https://github.com/albertomorini/CyberphisicalSystem <br/>
-_For storage reasons we do not provide the datasets of the paper into the repository_
+_For storage reasons we do not provide the datasets of the paper in this repository_
 
 
 ## Abstract
 
-We have to replicate what done into the paper linked before, so, we can divide the job in two side:
+We have to replicate what done in the paper linked before, so, we can divide the job in two side:
 
 1. **Intrusion detection**: which analyze the datasets and identify potential threat
-2. **Mobile app**: via notifications alert the user of the threat detected before
-
+2. **Mobile app**: that via notifications alert the user of the threat detected before
 
 ### Architecture
-Thus, we designed a simple architecture, made by backend (server with detection algorithm) and frontend (webapp).
 
-In short, the backend analyze the datasets and after identify the threats, make them available to clients via an HTTP server.
+We designed a simple architecture, made by backend (server with detection algorithm) and frontend (webapp).
+
+In short, the backend analyze the datasets and after identify the threats, make them available to clients through an HTTP server.
 
 
 ![Flowchart](images/flowchart.jpg)
@@ -36,12 +36,12 @@ _Fig1: flowchart of designed architecture_
 
 ### Technical specifications
 
-The **backend** is made via python scripts.
+The **backend** is made entirely in Python
 - *The building and testing has been made with Python 3.11.4*
 
-The **frontend** is a web application made with <a href="https://ionicframework.com/">Ionic framework</a>
+The **frontend** is a web application made with <a href="https://ionicframework.com/">Ionic framework</a> and compiled for Android
 - *Building and testing has been made with Ionic 7.1.1*
-- *Android 14 (5 sept 2023) API34 used with Android Studio Giraffe 2022.3.1 Patch 2*
+- *Android 14 (5 sept 2023) and API34 emulated in Android Studio Giraffe 2022.3.1 Patch 2*
 
 ## Intrusion detection side (backend)
 
@@ -147,13 +147,13 @@ def update_matrix(matrix, ids, dataset, adding_ids):
 Otherwise as the paper, we opted to create a web-application which communicate to server via HTTP packets.
 
 We took this decision for many aspects:
-- **portability**: because web application can be easily build for both mobile OS major(iOS and Android); representing a huge benefit ot maintainability and extendability of the code
+- **portability**: web application can be easily build for both mobile OS major(iOS and Android); representing a huge benefit in the maintainability and extendability of the code
 - **real life scenario**: we imagined the backend detection system installed in the cars, maybe integrated with Android Auto or CarPlay, which systems can communicate via Wi-Fi.
 
 
 ### Architecture
 
-Server sends the client the message retrieved by the Detection Algorithm, adding the property of which dataset the detection is from. <br/>
+Server ''sends'' the client the message retrieved by the Detection Algorithm, adding the property of which dataset the detection is from. <br/>
 The Content-type of packets is in "application/json" from.
 
 _Packet structure_
@@ -168,17 +168,15 @@ _Packet structure_
 }
 ```
 
-
-
-**DISCLAIMER**: to simulate a real life scenario server sends the client a new detection at every request received. <br/>
-**In an effective scenario, server will sends/makes available detections in real time as soon as they are identified**
+**DISCLAIMER**: to simulate a real life scenario, server sends the client a new detection at every request received. <br/>
+**In an effective scenario, server will makes available detections in real time as soon as they are identified**
 
 So, we let the client define the polling time to check server for new data.
 *Actually every 5 seconds*
 
 ### Server HTTP
 
-Made with Python and default libraries:
+Made in Python and default libraries:
 ```python
 import json #to parse/stringify JSON
 from http.server import BaseHTTPRequestHandler, HTTPServer # HTTP server
@@ -186,19 +184,19 @@ import sys # to get command line params
 import DetectionAlgorithm # the algorithm explained before
 ``````
 
-For simplicity, server as soon as it started launch the detection algorithm on every dataset provided; then, save the detections in a local variable.
+For simplicity, server as soon as it started, launch the detection algorithm on every dataset provided; then, save the detections in a local variable.
 
-Server provide the client a limited number of detections, indicated by the user as parameter. We made this decision in way to provide the clients detections of every dataset in a reduced time. <br/>
-If none parameter is provided, the default number of message for every dataset is 10.
+Server provides to clients a limited number of detections, indicated at the startup in the command line by user. We made this decision in way to provide detections of every dataset in a reduced time. <br/>
+*If none parameter is provided, the default number of message for every dataset is 10.*
 
-For example: `$ python3 server.py 5` --> will send 15 message in total to the client (5 detection for each dataset)
+For example: `$ python3 server.py 5` --> will send 15 packet in total to the client (5 detection for each dataset)
 
 ![DifferentDatasets](images/differentDataset.png)
-_Fig2: System running and mobile showing dataset of messages_
+_Fig2: Entire system running_
 
 #### Adding the dataset
 
-Server also add the current dataset into the detection:
+Server also add the current dataset into the detections:
 ```python
 detections = {
     "DoS" : DetectionAlgorithm.analyze_traffic(matrix,aux_ids, datasetExtractions["DoS"]),
@@ -217,32 +215,32 @@ for i in detections:    ## for each attack
 
 ### Client application
 
-As said before, the client application is made with Ionic framework (in React) and then compiled to Android APK app.<br/>
-For this test, iOS app hasn't been made.
+As said before, the client application is made with Ionic framework (in React) and then compiled as Android APK app.<br/>
+*For this test, iOS app hasn't been made.*
 
 We added some libraries: 
 
 - `@ionic/storage` to store into app's cache the detection history
-- `@capacitor/local-notifications` in way to trigger a native notification visible in the localbar of mobile phone
+- `@capacitor/local-notifications` in way to trigger a native mobile's notification
 - `moment.js` to have an easily manipulation of datetime format
 
 #### Life cycle
 
-App starts asking the permission, then start polling the server which is not configured until user don't save the server's socket.
+App starts asking the permission, then start polling the server which socket needs to be configured by user.
 ![Ask4Permissions](images/notificationPermission.png)
 _Fig3: App asking for permission to local notification_
-As soon IP address and port of the HTTP server are configured, client retrieve data and store into the cache, after that, via a "React State" automatically update the UI.
+As soon IP address and port of the HTTP server are correct, client retrieve data and store into the cache, after that, via a "React State" automatically update the UI.
 
 ![Working](images/working.png)
 _Fig4: Mobile app polling the server and retrieving data_
 
-Also at every new data, apps push into notification center of Android the message.
+Also at every new data, apps push int the notification center of Android the new alert.
 ![NotificationBar](images/notificationBar.png)
 _Fig5: The notification message in the notification bar_
 
 #### Messages
 
-At every detection received, client baptize the message received with a timestamp called "receptionTS". This information can be very useful in future thus to measure potential delay/latency of the system.
+At every detection received, client baptize the message with a timestamp called "receptionTS". This information can be very useful in future thus to measure potential delay/latency of the system.
 ```js
 res.data.forEach(message => { //res.data is an array of message, forEach one show a notification
     showLocalNotification(message.id, message.kind, message.msg); //trigger the android notification
@@ -251,15 +249,15 @@ res.data.forEach(message => { //res.data is an array of message, forEach one sho
 })
 ```
 
-Local notification are divided in two group as the message history, as the paper did. <br/>
+Local notifications (as the detections history) are divided in two group/kind, as the paper did: "attacks" and "unusual traffic" <br/>
 This information is retrieved by the Detection Algorithm and carried by the server in the client, which basically shows the respective message.
 
 ```js
 async function showLocalNotification(id, kindMessage = "NODATA", CANMessage) {
         let tmpBody;
-        if (kindMessage == "UNKNOWN") {
+        if (kindMessage == "ATTACK") {
             tmpBody = "Invalid messages have been detected. This may indicate a bus error or an attack."
-        } else if (kindMessage == "ATTACK") {
+        } else if (kindMessage == "UNUSUAL") {
             tmpBody = "Unusual patterns of messages have been detected. This may be the result of unusual activity, or it may indicate an attack."
         }
 
@@ -281,15 +279,15 @@ async function showLocalNotification(id, kindMessage = "NODATA", CANMessage) {
     }
 ```
 
-Detections have a red background in case of "Attack" and light grey if the detections have identified the threat as "Unknown traffic".
-See it in Fig2
+Detections have a red background in case of "Attack" and light grey if are identified the threat as "Unusual traffic".
+*See it in Fig2*
 
 ## Conclusion
 
 In conclusion, some critical thought about the system created:
 
 - The only negative observation that we need to make is about energy consumption of Wi-Fi, Bluetooth is lighter and probably available on more vehicles.
-- HTTP is an unsecure protocol, we adopt it just for an easily approach, but we strongly suggests to use a SSL certificate (_can be a self-signed one_) in way to use HTTPS.
+- HTTP is an unsecure protocol, we adopt it just for an easily approach, but we strongly suggests to use a SSL certificate (can be a self-signed one) in way to use HTTPS.
 
 ### Data of detection
 
