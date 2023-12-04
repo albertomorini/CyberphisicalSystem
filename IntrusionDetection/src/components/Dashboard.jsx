@@ -18,9 +18,9 @@ const Dashboard = () => {
      */
     async function showLocalNotification(id, kindMessage = "NODATA", CANMessage) {
         let tmpBody;
-        if (kindMessage == "UNKNOWN") {
+        if (kindMessage == "ATTACK") {
             tmpBody = "Invalid messages have been detected. This may indicate a bus error or an attack."
-        } else if (kindMessage == "ATTACK") {
+        } else if (kindMessage == "UNUSUAL") {
             tmpBody = "Unusual patterns of messages have been detected. This may be the result of unusual activity, or it may indicate an attack."
         }
 
