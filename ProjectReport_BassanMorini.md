@@ -8,8 +8,8 @@ Replication of first paper - IDS for CAN: A Practical Intrusion Detection System
 - link to the dataset: https://ocslab.hksecurity.net/Dataset/CAN-intrusion-dataset (section 1.3)
 
 **Authors:** 
-- Davide Bassan
-- Alberto Morini (mat. 2107783)
+- Davide Bassan (mat. ) - davide.bassan.1@studenti.unipd.it
+- Alberto Morini (mat. 2107783) - alberto.morini@studenti.unipd.it
 
 **Date:** 02 December 2023
 

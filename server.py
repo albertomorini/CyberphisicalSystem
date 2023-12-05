@@ -46,7 +46,7 @@ indexMessage = 0 ## to simulate a real time scenario, we send just a single mess
 class GetHandler(BaseHTTPRequestHandler):
     def do_GET(self): ##GET REQUESTS
         self.send_response(200)
-        # TODO: set JSON
+
         self.send_header('Content-type','application/json')
         self.send_header('Access-Control-Allow-Origin','*')
         self.end_headers()
