@@ -1,8 +1,8 @@
-# Project report
+# IDS for CAN - Replication project
 
 > First project of Cyber Physical System and IoT Security (course of Cybersecurity) - <a href="https://www.unipd.it/en/educational-offer/second-cycle-degree/science?tipo=LM&scuola=SC&ordinamento=2021&key=SC2598&cg=science">*Master degree in Computer Science* </a> 
 
-Replication of first paper - IDS for CAN: A Practical Intrusion Detection System for CAN Bus Security
+Replication of the paper - IDS for CAN: A Practical Intrusion Detection System for CAN Bus Security
 
 - link to the paper: https://ieeexplore.ieee.org/document/10001536
 - link to the dataset: https://ocslab.hksecurity.net/Dataset/CAN-intrusion-dataset (section 1.3)
@@ -31,8 +31,8 @@ _For storage reasons we do not provide the datasets of the paper in this reposit
 
 We have to replicate what done in the paper linked before, so, we can divide the job in two side:
 
-1. **Intrusion detection**: which analyze the datasets and identify potential threat
-2. **Mobile app**: that via notifications alert the user of the threat detected before
+1. **Intrusion detection**: which analyze the datasets and identify potential threats
+2. **Mobile app**: that via some notifications, alerts the user of the threat detected
 
 ### Architecture
 
@@ -47,7 +47,7 @@ _Fig1: flowchart of designed architecture_
 ### Technical specifications
 
 The **backend** is made entirely in Python
-- *The building and testing has been made with Python 3.11.4*
+- *Building and testing has been made with Python 3.11.4*
 
 The **frontend** is a web application made with <a href="https://ionicframework.com/">Ionic framework</a> and compiled for Android
 - *Building and testing has been made with Ionic 7.1.1*
@@ -163,16 +163,15 @@ def update_matrix(matrix, ids, dataset, adding_ids):
 Otherwise as the paper, we opted to create a web-application which communicate to server via HTTP packets.
 
 We took this decision for many aspects:
-- **portability**: web application can be easily build for both mobile OS major(iOS and Android); representing a huge benefit in the maintainability and extendability of the code
-- **real life scenario**: we imagined the backend detection system installed in the cars, maybe integrated with Android Auto or CarPlay, which systems can communicate via Wi-Fi.
+- **Portability**: web application can be easily build for both mobile OS major(iOS and Android); representing a huge benefit in the maintainability and extendability of the code
+- **Real life scenario**: we imagined the backend detection system installed in the cars, maybe integrated with Android Auto or CarPlay, which systems can communicate via Wi-Fi.
 
 
 ### Architecture
 
-Server ''sends'' the client the message retrieved by the Detection Algorithm, adding the property of which dataset the detection is from. <br/>
-The Content-type of packets is in "application/json" from.
+Server ''sends'' to clients the message retrieved by the Detection Algorithm, adding the property of which dataset the detection is from. <br/>
+The Content-type of packets has a JSON structure.
 
-_Packet structure_
 ```JSON
 {
     "timestamp": integer,
@@ -183,6 +182,7 @@ _Packet structure_
     "dataset": "DoS/Fuzzy/Impersonate/..."
 }
 ```
+_Packet structure_
 
 **DISCLAIMER**: to simulate a real life scenario, server sends the client a new detection at every request received. <br/>
 **In an effective scenario, server will makes available detections in real time as soon as they are identified**
@@ -202,10 +202,10 @@ import DetectionAlgorithm # the algorithm explained before
 
 For simplicity, server as soon as it started, launch the detection algorithm on every dataset provided; then, save the detections in a local variable.
 
-Server provides to clients a limited number of detections, indicated at the startup in the command line by user. We made this decision in way to provide detections of every dataset in a reduced time. <br/>
+Server provides to clients a limited number of detections, indicated at the startup via command line by user. We made this decision in way to provide detections of every dataset in a reduced time. <br/>
 *If none parameter is provided, the default number of message for every dataset is 10.*
 
-For example: `$ python3 server.py 5` --> will send 15 packet in total to the client (5 detection for each dataset)
+For example: `$ python3 server.py 5` --> will send 15 packets in total to the client (5 detection for each dataset)
 
 ![DifferentDatasets](images/differentDataset.png)
 _Fig2: Entire system running_
@@ -214,7 +214,7 @@ _Fig2: Entire system running_
 
 #### Adding the dataset
 
-Server also add the current dataset into the detections:
+As said before, server also adds the origin dataset into the detections:
 ```python
 detections = {
     "DoS" : DetectionAlgorithm.analyze_traffic(matrix,aux_ids, datasetExtractions["DoS"]),
@@ -225,7 +225,7 @@ detections = {
 for i in detections:    ## for each attack 
         for j in range(limitDetections): 
             detections[i][j]["dataset"]= i
-            AllDetections.append(detections[i][j])
+            AllDetections.append(detections[i][j]) #add dataset in the current detection
 
     return AllDetections
 ```
@@ -233,7 +233,7 @@ for i in detections:    ## for each attack
 
 ### Client application
 
-As said before, the client application is made with Ionic framework (in React) and then compiled as Android APK app.<br/>
+The mobile application is made with Ionic framework (in React) and then compiled as Android APK app.<br/>
 *For this test, iOS app hasn't been made.*
 
 We added some libraries: 
@@ -242,25 +242,29 @@ We added some libraries:
 - `@capacitor/local-notifications` in way to trigger a native mobile's notification
 - `moment.js` to have an easily manipulation of datetime format
 
+<div style="page-break-after: always;"></div>
+
 #### Life cycle
 
 App starts asking the permission, then start polling the server which socket needs to be configured by user.
 ![Ask4Permissions](images/notificationPermission.png)
 _Fig3: App asking for permission to local notification_
-As soon IP address and port of the HTTP server are correct, client retrieve data and store into the cache, after that, via a "React State" automatically update the UI.
+
+
+As soon IP address and port of the HTTP server are correct, client retrieve data and store it into the cache, after that, with a "React State" automatically update  the history list.
 
 ![Working](images/working.png)
 _Fig4: Mobile app polling the server and retrieving data_
 
-Also at every new data, apps push int the notification center of Android the new alert.
+Also at every new data, apps push in the notification center of Android the new alert.
 ![NotificationBar](images/notificationBar.png)
-_Fig5: The notification message in the notification bar_
+_Fig5: The notification messages in the notification bar_
 
 <div style="page-break-after: always;"></div>
 
 #### Messages
 
-At every detection received, client baptize the message with a timestamp called "receptionTS". This information can be very useful in future thus to measure potential delay/latency of the system.
+At every detection received, client baptize the message with a timestamp (called "receptionTS"). This information can be very useful in future thus to measure potential delay/latency of the system.
 ```js
 res.data.forEach(message => { //res.data is an array of message, forEach one show a notification
     showLocalNotification(message.id, message.kind, message.msg); //trigger the android notification
@@ -270,7 +274,7 @@ res.data.forEach(message => { //res.data is an array of message, forEach one sho
 ```
 
 Local notifications (as the detections history) are divided in two group/kind, as the paper did: "attacks" and "unusual traffic" <br/>
-This information is retrieved by the Detection Algorithm and carried by the server in the client, which basically shows the respective message.
+This information is defined by the Detection Algorithm and than the app basically shows the respective message.
 
 ```js
 async function showLocalNotification(id, kindMessage = "NODATA", CANMessage) {
@@ -297,7 +301,7 @@ async function showLocalNotification(id, kindMessage = "NODATA", CANMessage) {
     }
 ```
 
-Detections have a red background in case of "Attack" and light grey if are identified the threat as "Unusual traffic". (*See it in Fig2*)
+Detections have a red background in case of "Attack" and light grey if threats are identified as "Unusual traffic". (*See it in Fig2*)
 
 <div style="page-break-after: always;"></div>
 
@@ -310,7 +314,7 @@ In conclusion, some critical thought about the system created:
 
 ### Data of detection
 
-With the data available, the algorithm we replicated, have detected many malicious messages, in numbers:
+With the available datasets, the algorithm we replicated have detected many malicious messages, in numbers:
 
 - 605'379 over 656'579 messages for **DoS attack** (numerically in line with a Denial of Service attack)
 - 21890 over 591'900 messages for **Fuzzy attack**
