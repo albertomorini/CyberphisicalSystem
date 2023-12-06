@@ -287,14 +287,14 @@ res.data.forEach(message => { //res.data is an array of message, forEach one sho
 })
 ```
 
-Local notifications, as well as the detection history, are categorized into two groups or kinds: "attacks" and "unusual traffic", similar to the approach in the paper. This information is defined by the Detection Algorithm, and the app then displays the respective message accordingly.
+Local notifications, as well as the detection history, are categorized into two groups or kinds: "attacks" and "unkonwn traffic", similar to the approach in the paper. This information is defined by the Detection Algorithm, and the app then displays the respective message accordingly.
 
 ```js
 async function showLocalNotification(id, kindMessage = "NODATA", CANMessage) {
         let tmpBody;
         if (kindMessage == "ATTACK") {
             tmpBody = "Invalid messages have been detected. This may indicate a bus error or an attack."
-        } else if (kindMessage == "UNUSUAL") {
+        } else if (kindMessage == "UNKNOWN") {
             tmpBody = "Unusual patterns of messages have been detected. This may be the result of unusual activity, or it may indicate an attack."
         }
 
