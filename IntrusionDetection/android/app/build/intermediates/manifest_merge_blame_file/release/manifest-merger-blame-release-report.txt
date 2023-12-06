@@ -1,0 +1,345 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.IntrusionDetection.AMDB"
+4    android:versionCode="1"
+5    android:versionName="1.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="22"
+8-->/Users/alby/unipd/Cyberphisical/CyberphisicalSystem/IntrusionDetection/android/app/src/main/AndroidManifest.xml
+9        android:targetSdkVersion="33" />
+9-->/Users/alby/unipd/Cyberphisical/CyberphisicalSystem/IntrusionDetection/android/app/src/main/AndroidManifest.xml
+10
+11    <!-- Permissions -->
+12    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+12-->/Users/alby/unipd/Cyberphisical/CyberphisicalSystem/IntrusionDetection/android/app/src/main/AndroidManifest.xml:42:5-76
+12-->/Users/alby/unipd/Cyberphisical/CyberphisicalSystem/IntrusionDetection/android/app/src/main/AndroidManifest.xml:42:22-74
+13    <uses-permission android:name="android.permission.INTERNET" />
+13-->/Users/alby/unipd/Cyberphisical/CyberphisicalSystem/IntrusionDetection/android/app/src/main/AndroidManifest.xml:43:5-67
+13-->/Users/alby/unipd/Cyberphisical/CyberphisicalSystem/IntrusionDetection/android/app/src/main/AndroidManifest.xml:43:22-64
+14    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
+14-->/Users/alby/unipd/Cyberphisical/CyberphisicalSystem/IntrusionDetection/android/app/src/main/AndroidManifest.xml:44:5-79
+14-->/Users/alby/unipd/Cyberphisical/CyberphisicalSystem/IntrusionDetection/android/app/src/main/AndroidManifest.xml:44:22-76
+15    <uses-permission android:name="android.permission.VIBRATE" />
+15-->[:capacitor-haptics] /Users/alby/unipd/Cyberphisical/CyberphisicalSystem/IntrusionDetection/node_modules/@capacitor/haptics/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:7:5-66
+15-->[:capacitor-haptics] /Users/alby/unipd/Cyberphisical/CyberphisicalSystem/IntrusionDetection/node_modules/@capacitor/haptics/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:7:22-63
+16    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+16-->[:capacitor-local-notifications] /Users/alby/unipd/Cyberphisical/CyberphisicalSystem/IntrusionDetection/node_modules/@capacitor/local-notifications/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:7:5-81
+16-->[:capacitor-local-notifications] /Users/alby/unipd/Cyberphisical/CyberphisicalSystem/IntrusionDetection/node_modules/@capacitor/local-notifications/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:7:22-78
+17    <uses-permission android:name="android.permission.WAKE_LOCK" />
+17-->[:capacitor-local-notifications] /Users/alby/unipd/Cyberphisical/CyberphisicalSystem/IntrusionDetection/node_modules/@capacitor/local-notifications/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:8:5-68
+17-->[:capacitor-local-notifications] /Users/alby/unipd/Cyberphisical/CyberphisicalSystem/IntrusionDetection/node_modules/@capacitor/local-notifications/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:8:22-65
+18    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> <!-- Required by older versions of Google Play services to create IID tokens -->
+18-->[com.google.firebase:firebase-messaging:23.1.2] /Users/alby/.gradle/caches/transforms-3/5fac1eb95cba1186f24601984c3cb9ff/transformed/firebase-messaging-23.1.2/AndroidManifest.xml:24:5-79
+18-->[com.google.firebase:firebase-messaging:23.1.2] /Users/alby/.gradle/caches/transforms-3/5fac1eb95cba1186f24601984c3cb9ff/transformed/firebase-messaging-23.1.2/AndroidManifest.xml:24:22-76
+19    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+19-->[com.google.firebase:firebase-messaging:23.1.2] /Users/alby/.gradle/caches/transforms-3/5fac1eb95cba1186f24601984c3cb9ff/transformed/firebase-messaging-23.1.2/AndroidManifest.xml:28:5-82
+19-->[com.google.firebase:firebase-messaging:23.1.2] /Users/alby/.gradle/caches/transforms-3/5fac1eb95cba1186f24601984c3cb9ff/transformed/firebase-messaging-23.1.2/AndroidManifest.xml:28:22-79
+20
+21    <permission
+21-->[androidx.core:core:1.10.0] /Users/alby/.gradle/caches/transforms-3/4084e7bcb4a1738e1ff26326a1997c6e/transformed/core-1.10.0/AndroidManifest.xml:22:5-24:47
+22        android:name="com.IntrusionDetection.AMDB.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+22-->[androidx.core:core:1.10.0] /Users/alby/.gradle/caches/transforms-3/4084e7bcb4a1738e1ff26326a1997c6e/transformed/core-1.10.0/AndroidManifest.xml:23:9-81
+23        android:protectionLevel="signature" />
+23-->[androidx.core:core:1.10.0] /Users/alby/.gradle/caches/transforms-3/4084e7bcb4a1738e1ff26326a1997c6e/transformed/core-1.10.0/AndroidManifest.xml:24:9-44
+24
+25    <uses-permission android:name="com.IntrusionDetection.AMDB.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
+25-->[androidx.core:core:1.10.0] /Users/alby/.gradle/caches/transforms-3/4084e7bcb4a1738e1ff26326a1997c6e/transformed/core-1.10.0/AndroidManifest.xml:26:5-97
+25-->[androidx.core:core:1.10.0] /Users/alby/.gradle/caches/transforms-3/4084e7bcb4a1738e1ff26326a1997c6e/transformed/core-1.10.0/AndroidManifest.xml:26:22-94
+26
+27    <application
+27-->/Users/alby/unipd/Cyberphisical/CyberphisicalSystem/IntrusionDetection/android/app/src/main/AndroidManifest.xml:4:5-39:19
+28        android:allowBackup="true"
+28-->/Users/alby/unipd/Cyberphisical/CyberphisicalSystem/IntrusionDetection/android/app/src/main/AndroidManifest.xml:5:9-35
+29        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+29-->[androidx.core:core:1.10.0] /Users/alby/.gradle/caches/transforms-3/4084e7bcb4a1738e1ff26326a1997c6e/transformed/core-1.10.0/AndroidManifest.xml:28:18-86
+30        android:icon="@mipmap/ic_launcher"
+30-->/Users/alby/unipd/Cyberphisical/CyberphisicalSystem/IntrusionDetection/android/app/src/main/AndroidManifest.xml:6:9-43
+31        android:label="@string/app_name"
+31-->/Users/alby/unipd/Cyberphisical/CyberphisicalSystem/IntrusionDetection/android/app/src/main/AndroidManifest.xml:7:9-41
+32        android:roundIcon="@mipmap/ic_launcher_round"
+32-->/Users/alby/unipd/Cyberphisical/CyberphisicalSystem/IntrusionDetection/android/app/src/main/AndroidManifest.xml:8:9-54
+33        android:supportsRtl="true"
+33-->/Users/alby/unipd/Cyberphisical/CyberphisicalSystem/IntrusionDetection/android/app/src/main/AndroidManifest.xml:9:9-35
+34        android:theme="@style/AppTheme"
+34-->/Users/alby/unipd/Cyberphisical/CyberphisicalSystem/IntrusionDetection/android/app/src/main/AndroidManifest.xml:11:9-40
+35        android:usesCleartextTraffic="true" >
+35-->/Users/alby/unipd/Cyberphisical/CyberphisicalSystem/IntrusionDetection/android/app/src/main/AndroidManifest.xml:10:9-44
+36        <activity
+36-->/Users/alby/unipd/Cyberphisical/CyberphisicalSystem/IntrusionDetection/android/app/src/main/AndroidManifest.xml:13:9-27:20
+37            android:name="com.IntrusionDetection.AMDB.MainActivity"
+37-->/Users/alby/unipd/Cyberphisical/CyberphisicalSystem/IntrusionDetection/android/app/src/main/AndroidManifest.xml:15:13-41
+38            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale|smallestScreenSize|screenLayout|uiMode"
+38-->/Users/alby/unipd/Cyberphisical/CyberphisicalSystem/IntrusionDetection/android/app/src/main/AndroidManifest.xml:14:13-129
+39            android:exported="true"
+39-->/Users/alby/unipd/Cyberphisical/CyberphisicalSystem/IntrusionDetection/android/app/src/main/AndroidManifest.xml:20:13-36
+40            android:label="@string/title_activity_main"
+40-->/Users/alby/unipd/Cyberphisical/CyberphisicalSystem/IntrusionDetection/android/app/src/main/AndroidManifest.xml:16:13-56
+41            android:launchMode="singleTask"
+41-->/Users/alby/unipd/Cyberphisical/CyberphisicalSystem/IntrusionDetection/android/app/src/main/AndroidManifest.xml:18:13-44
+42            android:theme="@style/AppTheme.NoActionBarLaunch"
+42-->/Users/alby/unipd/Cyberphisical/CyberphisicalSystem/IntrusionDetection/android/app/src/main/AndroidManifest.xml:17:13-62
+43            android:usesCleartextTraffic="true" >
+43-->/Users/alby/unipd/Cyberphisical/CyberphisicalSystem/IntrusionDetection/android/app/src/main/AndroidManifest.xml:19:13-48
+44            <intent-filter>
+44-->/Users/alby/unipd/Cyberphisical/CyberphisicalSystem/IntrusionDetection/android/app/src/main/AndroidManifest.xml:22:13-25:29
+45                <action android:name="android.intent.action.MAIN" />
+45-->/Users/alby/unipd/Cyberphisical/CyberphisicalSystem/IntrusionDetection/android/app/src/main/AndroidManifest.xml:23:17-69
+45-->/Users/alby/unipd/Cyberphisical/CyberphisicalSystem/IntrusionDetection/android/app/src/main/AndroidManifest.xml:23:25-66
+46
+47                <category android:name="android.intent.category.LAUNCHER" />
+47-->/Users/alby/unipd/Cyberphisical/CyberphisicalSystem/IntrusionDetection/android/app/src/main/AndroidManifest.xml:24:17-77
+47-->/Users/alby/unipd/Cyberphisical/CyberphisicalSystem/IntrusionDetection/android/app/src/main/AndroidManifest.xml:24:27-74
+48            </intent-filter>
+49        </activity>
+50
+51        <provider
+52            android:name="androidx.core.content.FileProvider"
+52-->/Users/alby/unipd/Cyberphisical/CyberphisicalSystem/IntrusionDetection/android/app/src/main/AndroidManifest.xml:30:13-62
+53            android:authorities="com.IntrusionDetection.AMDB.fileprovider"
+53-->/Users/alby/unipd/Cyberphisical/CyberphisicalSystem/IntrusionDetection/android/app/src/main/AndroidManifest.xml:31:13-64
+54            android:exported="false"
+54-->/Users/alby/unipd/Cyberphisical/CyberphisicalSystem/IntrusionDetection/android/app/src/main/AndroidManifest.xml:32:13-37
+55            android:grantUriPermissions="true"
+55-->/Users/alby/unipd/Cyberphisical/CyberphisicalSystem/IntrusionDetection/android/app/src/main/AndroidManifest.xml:34:13-47
+56            android:usesCleartextTraffic="true" >
+56-->/Users/alby/unipd/Cyberphisical/CyberphisicalSystem/IntrusionDetection/android/app/src/main/AndroidManifest.xml:33:13-48
+57            <meta-data
+57-->/Users/alby/unipd/Cyberphisical/CyberphisicalSystem/IntrusionDetection/android/app/src/main/AndroidManifest.xml:35:13-37:64
+58                android:name="android.support.FILE_PROVIDER_PATHS"
+58-->/Users/alby/unipd/Cyberphisical/CyberphisicalSystem/IntrusionDetection/android/app/src/main/AndroidManifest.xml:36:17-67
+59                android:resource="@xml/file_paths" />
+59-->/Users/alby/unipd/Cyberphisical/CyberphisicalSystem/IntrusionDetection/android/app/src/main/AndroidManifest.xml:37:17-51
+60        </provider>
+61
+62        <receiver android:name="com.capacitorjs.plugins.localnotifications.TimedNotificationPublisher" />
+62-->[:capacitor-local-notifications] /Users/alby/unipd/Cyberphisical/CyberphisicalSystem/IntrusionDetection/node_modules/@capacitor/local-notifications/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:12:9-106
+62-->[:capacitor-local-notifications] /Users/alby/unipd/Cyberphisical/CyberphisicalSystem/IntrusionDetection/node_modules/@capacitor/local-notifications/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:12:19-103
+63        <receiver android:name="com.capacitorjs.plugins.localnotifications.NotificationDismissReceiver" />
+63-->[:capacitor-local-notifications] /Users/alby/unipd/Cyberphisical/CyberphisicalSystem/IntrusionDetection/node_modules/@capacitor/local-notifications/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:13:9-107
+63-->[:capacitor-local-notifications] /Users/alby/unipd/Cyberphisical/CyberphisicalSystem/IntrusionDetection/node_modules/@capacitor/local-notifications/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:13:19-104
+64        <receiver
+64-->[:capacitor-local-notifications] /Users/alby/unipd/Cyberphisical/CyberphisicalSystem/IntrusionDetection/node_modules/@capacitor/local-notifications/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:14:9-23:20
+65            android:name="com.capacitorjs.plugins.localnotifications.LocalNotificationRestoreReceiver"
+65-->[:capacitor-local-notifications] /Users/alby/unipd/Cyberphisical/CyberphisicalSystem/IntrusionDetection/node_modules/@capacitor/local-notifications/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:15:13-103
+66            android:directBootAware="true"
+66-->[:capacitor-local-notifications] /Users/alby/unipd/Cyberphisical/CyberphisicalSystem/IntrusionDetection/node_modules/@capacitor/local-notifications/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:16:13-43
+67            android:exported="false" >
+67-->[:capacitor-local-notifications] /Users/alby/unipd/Cyberphisical/CyberphisicalSystem/IntrusionDetection/node_modules/@capacitor/local-notifications/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:17:13-37
+68            <intent-filter>
+68-->[:capacitor-local-notifications] /Users/alby/unipd/Cyberphisical/CyberphisicalSystem/IntrusionDetection/node_modules/@capacitor/local-notifications/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:18:13-22:29
+69                <action android:name="android.intent.action.LOCKED_BOOT_COMPLETED" />
+69-->[:capacitor-local-notifications] /Users/alby/unipd/Cyberphisical/CyberphisicalSystem/IntrusionDetection/node_modules/@capacitor/local-notifications/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:19:17-86
+69-->[:capacitor-local-notifications] /Users/alby/unipd/Cyberphisical/CyberphisicalSystem/IntrusionDetection/node_modules/@capacitor/local-notifications/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:19:25-83
+70                <action android:name="android.intent.action.BOOT_COMPLETED" />
+70-->[:capacitor-local-notifications] /Users/alby/unipd/Cyberphisical/CyberphisicalSystem/IntrusionDetection/node_modules/@capacitor/local-notifications/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:20:17-79
+70-->[:capacitor-local-notifications] /Users/alby/unipd/Cyberphisical/CyberphisicalSystem/IntrusionDetection/node_modules/@capacitor/local-notifications/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:20:25-76
+71                <action android:name="android.intent.action.QUICKBOOT_POWERON" />
+71-->[:capacitor-local-notifications] /Users/alby/unipd/Cyberphisical/CyberphisicalSystem/IntrusionDetection/node_modules/@capacitor/local-notifications/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:21:17-82
+71-->[:capacitor-local-notifications] /Users/alby/unipd/Cyberphisical/CyberphisicalSystem/IntrusionDetection/node_modules/@capacitor/local-notifications/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:21:25-79
+72            </intent-filter>
+73        </receiver>
+74
+75        <service
+75-->[:capacitor-push-notifications] /Users/alby/unipd/Cyberphisical/CyberphisicalSystem/IntrusionDetection/node_modules/@capacitor/push-notifications/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:8:9-14:19
+76            android:name="com.capacitorjs.plugins.pushnotifications.MessagingService"
+76-->[:capacitor-push-notifications] /Users/alby/unipd/Cyberphisical/CyberphisicalSystem/IntrusionDetection/node_modules/@capacitor/push-notifications/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:9:13-86
+77            android:exported="false" >
+77-->[:capacitor-push-notifications] /Users/alby/unipd/Cyberphisical/CyberphisicalSystem/IntrusionDetection/node_modules/@capacitor/push-notifications/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:10:13-37
+78            <intent-filter>
+78-->[:capacitor-push-notifications] /Users/alby/unipd/Cyberphisical/CyberphisicalSystem/IntrusionDetection/node_modules/@capacitor/push-notifications/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:11:13-13:29
+79                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+79-->[:capacitor-push-notifications] /Users/alby/unipd/Cyberphisical/CyberphisicalSystem/IntrusionDetection/node_modules/@capacitor/push-notifications/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:12:17-78
+79-->[:capacitor-push-notifications] /Users/alby/unipd/Cyberphisical/CyberphisicalSystem/IntrusionDetection/node_modules/@capacitor/push-notifications/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:12:25-75
+80            </intent-filter>
+81        </service>
+82
+83        <receiver
+83-->[com.google.firebase:firebase-messaging:23.1.2] /Users/alby/.gradle/caches/transforms-3/5fac1eb95cba1186f24601984c3cb9ff/transformed/firebase-messaging-23.1.2/AndroidManifest.xml:31:9-38:20
+84            android:name="com.google.firebase.iid.FirebaseInstanceIdReceiver"
+84-->[com.google.firebase:firebase-messaging:23.1.2] /Users/alby/.gradle/caches/transforms-3/5fac1eb95cba1186f24601984c3cb9ff/transformed/firebase-messaging-23.1.2/AndroidManifest.xml:32:13-78
+85            android:exported="true"
+85-->[com.google.firebase:firebase-messaging:23.1.2] /Users/alby/.gradle/caches/transforms-3/5fac1eb95cba1186f24601984c3cb9ff/transformed/firebase-messaging-23.1.2/AndroidManifest.xml:33:13-36
+86            android:permission="com.google.android.c2dm.permission.SEND" >
+86-->[com.google.firebase:firebase-messaging:23.1.2] /Users/alby/.gradle/caches/transforms-3/5fac1eb95cba1186f24601984c3cb9ff/transformed/firebase-messaging-23.1.2/AndroidManifest.xml:34:13-73
+87            <intent-filter>
+87-->[com.google.firebase:firebase-messaging:23.1.2] /Users/alby/.gradle/caches/transforms-3/5fac1eb95cba1186f24601984c3cb9ff/transformed/firebase-messaging-23.1.2/AndroidManifest.xml:35:13-37:29
+88                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+88-->[com.google.firebase:firebase-messaging:23.1.2] /Users/alby/.gradle/caches/transforms-3/5fac1eb95cba1186f24601984c3cb9ff/transformed/firebase-messaging-23.1.2/AndroidManifest.xml:36:17-81
+88-->[com.google.firebase:firebase-messaging:23.1.2] /Users/alby/.gradle/caches/transforms-3/5fac1eb95cba1186f24601984c3cb9ff/transformed/firebase-messaging-23.1.2/AndroidManifest.xml:36:25-78
+89            </intent-filter>
+90        </receiver>
+91        <!--
+92             FirebaseMessagingService performs security checks at runtime,
+93             but set to not exported to explicitly avoid allowing another app to call it.
+94        -->
+95        <service
+95-->[com.google.firebase:firebase-messaging:23.1.2] /Users/alby/.gradle/caches/transforms-3/5fac1eb95cba1186f24601984c3cb9ff/transformed/firebase-messaging-23.1.2/AndroidManifest.xml:44:9-51:19
+96            android:name="com.google.firebase.messaging.FirebaseMessagingService"
+96-->[com.google.firebase:firebase-messaging:23.1.2] /Users/alby/.gradle/caches/transforms-3/5fac1eb95cba1186f24601984c3cb9ff/transformed/firebase-messaging-23.1.2/AndroidManifest.xml:45:13-82
+97            android:directBootAware="true"
+97-->[com.google.firebase:firebase-messaging:23.1.2] /Users/alby/.gradle/caches/transforms-3/5fac1eb95cba1186f24601984c3cb9ff/transformed/firebase-messaging-23.1.2/AndroidManifest.xml:46:13-43
+98            android:exported="false" >
+98-->[com.google.firebase:firebase-messaging:23.1.2] /Users/alby/.gradle/caches/transforms-3/5fac1eb95cba1186f24601984c3cb9ff/transformed/firebase-messaging-23.1.2/AndroidManifest.xml:47:13-37
+99            <intent-filter android:priority="-500" >
+99-->[:capacitor-push-notifications] /Users/alby/unipd/Cyberphisical/CyberphisicalSystem/IntrusionDetection/node_modules/@capacitor/push-notifications/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:11:13-13:29
+100                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+100-->[:capacitor-push-notifications] /Users/alby/unipd/Cyberphisical/CyberphisicalSystem/IntrusionDetection/node_modules/@capacitor/push-notifications/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:12:17-78
+100-->[:capacitor-push-notifications] /Users/alby/unipd/Cyberphisical/CyberphisicalSystem/IntrusionDetection/node_modules/@capacitor/push-notifications/android/build/intermediates/merged_manifest/release/AndroidManifest.xml:12:25-75
+101            </intent-filter>
+102        </service>
+103        <service
+103-->[com.google.firebase:firebase-messaging:23.1.2] /Users/alby/.gradle/caches/transforms-3/5fac1eb95cba1186f24601984c3cb9ff/transformed/firebase-messaging-23.1.2/AndroidManifest.xml:52:9-58:19
+104            android:name="com.google.firebase.components.ComponentDiscoveryService"
+104-->[com.google.firebase:firebase-messaging:23.1.2] /Users/alby/.gradle/caches/transforms-3/5fac1eb95cba1186f24601984c3cb9ff/transformed/firebase-messaging-23.1.2/AndroidManifest.xml:53:13-84
+105            android:directBootAware="true"
+105-->[com.google.firebase:firebase-common:20.3.1] /Users/alby/.gradle/caches/transforms-3/10e3746b7658e816f47528e6c962989a/transformed/firebase-common-20.3.1/AndroidManifest.xml:34:13-43
+106            android:exported="false" >
+106-->[com.google.firebase:firebase-messaging:23.1.2] /Users/alby/.gradle/caches/transforms-3/5fac1eb95cba1186f24601984c3cb9ff/transformed/firebase-messaging-23.1.2/AndroidManifest.xml:54:13-37
+107            <meta-data
+107-->[com.google.firebase:firebase-messaging:23.1.2] /Users/alby/.gradle/caches/transforms-3/5fac1eb95cba1186f24601984c3cb9ff/transformed/firebase-messaging-23.1.2/AndroidManifest.xml:55:13-57:85
+108                android:name="com.google.firebase.components:com.google.firebase.messaging.FirebaseMessagingRegistrar"
+108-->[com.google.firebase:firebase-messaging:23.1.2] /Users/alby/.gradle/caches/transforms-3/5fac1eb95cba1186f24601984c3cb9ff/transformed/firebase-messaging-23.1.2/AndroidManifest.xml:56:17-119
+109                android:value="com.google.firebase.components.ComponentRegistrar" />
+109-->[com.google.firebase:firebase-messaging:23.1.2] /Users/alby/.gradle/caches/transforms-3/5fac1eb95cba1186f24601984c3cb9ff/transformed/firebase-messaging-23.1.2/AndroidManifest.xml:57:17-82
+110            <meta-data
+110-->[com.google.firebase:firebase-datatransport:18.1.7] /Users/alby/.gradle/caches/transforms-3/876525f9a978da108dfce2a5f3052a4b/transformed/firebase-datatransport-18.1.7/AndroidManifest.xml:27:13-29:85
+111                android:name="com.google.firebase.components:com.google.firebase.datatransport.TransportRegistrar"
+111-->[com.google.firebase:firebase-datatransport:18.1.7] /Users/alby/.gradle/caches/transforms-3/876525f9a978da108dfce2a5f3052a4b/transformed/firebase-datatransport-18.1.7/AndroidManifest.xml:28:17-115
+112                android:value="com.google.firebase.components.ComponentRegistrar" />
+112-->[com.google.firebase:firebase-datatransport:18.1.7] /Users/alby/.gradle/caches/transforms-3/876525f9a978da108dfce2a5f3052a4b/transformed/firebase-datatransport-18.1.7/AndroidManifest.xml:29:17-82
+113            <meta-data
+113-->[com.google.firebase:firebase-installations:17.1.3] /Users/alby/.gradle/caches/transforms-3/156c773db6c2c6f5e4a160f5839505fa/transformed/firebase-installations-17.1.3/AndroidManifest.xml:17:13-19:85
+114                android:name="com.google.firebase.components:com.google.firebase.installations.FirebaseInstallationsRegistrar"
+114-->[com.google.firebase:firebase-installations:17.1.3] /Users/alby/.gradle/caches/transforms-3/156c773db6c2c6f5e4a160f5839505fa/transformed/firebase-installations-17.1.3/AndroidManifest.xml:18:17-127
+115                android:value="com.google.firebase.components.ComponentRegistrar" />
+115-->[com.google.firebase:firebase-installations:17.1.3] /Users/alby/.gradle/caches/transforms-3/156c773db6c2c6f5e4a160f5839505fa/transformed/firebase-installations-17.1.3/AndroidManifest.xml:19:17-82
+116        </service>
+117
+118        <provider
+118-->[com.google.firebase:firebase-common:20.3.1] /Users/alby/.gradle/caches/transforms-3/10e3746b7658e816f47528e6c962989a/transformed/firebase-common-20.3.1/AndroidManifest.xml:25:9-30:39
+119            android:name="com.google.firebase.provider.FirebaseInitProvider"
+119-->[com.google.firebase:firebase-common:20.3.1] /Users/alby/.gradle/caches/transforms-3/10e3746b7658e816f47528e6c962989a/transformed/firebase-common-20.3.1/AndroidManifest.xml:26:13-77
+120            android:authorities="com.IntrusionDetection.AMDB.firebaseinitprovider"
+120-->[com.google.firebase:firebase-common:20.3.1] /Users/alby/.gradle/caches/transforms-3/10e3746b7658e816f47528e6c962989a/transformed/firebase-common-20.3.1/AndroidManifest.xml:27:13-72
+121            android:directBootAware="true"
+121-->[com.google.firebase:firebase-common:20.3.1] /Users/alby/.gradle/caches/transforms-3/10e3746b7658e816f47528e6c962989a/transformed/firebase-common-20.3.1/AndroidManifest.xml:28:13-43
+122            android:exported="false"
+122-->[com.google.firebase:firebase-common:20.3.1] /Users/alby/.gradle/caches/transforms-3/10e3746b7658e816f47528e6c962989a/transformed/firebase-common-20.3.1/AndroidManifest.xml:29:13-37
+123            android:initOrder="100" />
+123-->[com.google.firebase:firebase-common:20.3.1] /Users/alby/.gradle/caches/transforms-3/10e3746b7658e816f47528e6c962989a/transformed/firebase-common-20.3.1/AndroidManifest.xml:30:13-36
+124
+125        <activity
+125-->[com.google.android.gms:play-services-base:18.0.1] /Users/alby/.gradle/caches/transforms-3/2d962741d91c910a3db7a5460737cdfe/transformed/play-services-base-18.0.1/AndroidManifest.xml:20:9-22:45
+126            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+126-->[com.google.android.gms:play-services-base:18.0.1] /Users/alby/.gradle/caches/transforms-3/2d962741d91c910a3db7a5460737cdfe/transformed/play-services-base-18.0.1/AndroidManifest.xml:20:19-85
+127            android:exported="false"
+127-->[com.google.android.gms:play-services-base:18.0.1] /Users/alby/.gradle/caches/transforms-3/2d962741d91c910a3db7a5460737cdfe/transformed/play-services-base-18.0.1/AndroidManifest.xml:22:19-43
+128            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+128-->[com.google.android.gms:play-services-base:18.0.1] /Users/alby/.gradle/caches/transforms-3/2d962741d91c910a3db7a5460737cdfe/transformed/play-services-base-18.0.1/AndroidManifest.xml:21:19-78
+129
+130        <meta-data
+130-->[com.google.android.gms:play-services-basement:18.1.0] /Users/alby/.gradle/caches/transforms-3/9c93503ec2f6c0acb578d7618e52d827/transformed/play-services-basement-18.1.0/AndroidManifest.xml:21:9-23:69
+131            android:name="com.google.android.gms.version"
+131-->[com.google.android.gms:play-services-basement:18.1.0] /Users/alby/.gradle/caches/transforms-3/9c93503ec2f6c0acb578d7618e52d827/transformed/play-services-basement-18.1.0/AndroidManifest.xml:22:13-58
+132            android:value="@integer/google_play_services_version" />
+132-->[com.google.android.gms:play-services-basement:18.1.0] /Users/alby/.gradle/caches/transforms-3/9c93503ec2f6c0acb578d7618e52d827/transformed/play-services-basement-18.1.0/AndroidManifest.xml:23:13-66
+133
+134        <provider
+134-->[androidx.emoji2:emoji2:1.2.0] /Users/alby/.gradle/caches/transforms-3/bc4e404d2e4e27a8333e074e645fe6c4/transformed/emoji2-1.2.0/AndroidManifest.xml:24:9-32:20
+135            android:name="androidx.startup.InitializationProvider"
+135-->[androidx.emoji2:emoji2:1.2.0] /Users/alby/.gradle/caches/transforms-3/bc4e404d2e4e27a8333e074e645fe6c4/transformed/emoji2-1.2.0/AndroidManifest.xml:25:13-67
+136            android:authorities="com.IntrusionDetection.AMDB.androidx-startup"
+136-->[androidx.emoji2:emoji2:1.2.0] /Users/alby/.gradle/caches/transforms-3/bc4e404d2e4e27a8333e074e645fe6c4/transformed/emoji2-1.2.0/AndroidManifest.xml:26:13-68
+137            android:exported="false" >
+137-->[androidx.emoji2:emoji2:1.2.0] /Users/alby/.gradle/caches/transforms-3/bc4e404d2e4e27a8333e074e645fe6c4/transformed/emoji2-1.2.0/AndroidManifest.xml:27:13-37
+138            <meta-data
+138-->[androidx.emoji2:emoji2:1.2.0] /Users/alby/.gradle/caches/transforms-3/bc4e404d2e4e27a8333e074e645fe6c4/transformed/emoji2-1.2.0/AndroidManifest.xml:29:13-31:52
+139                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+139-->[androidx.emoji2:emoji2:1.2.0] /Users/alby/.gradle/caches/transforms-3/bc4e404d2e4e27a8333e074e645fe6c4/transformed/emoji2-1.2.0/AndroidManifest.xml:30:17-75
+140                android:value="androidx.startup" />
+140-->[androidx.emoji2:emoji2:1.2.0] /Users/alby/.gradle/caches/transforms-3/bc4e404d2e4e27a8333e074e645fe6c4/transformed/emoji2-1.2.0/AndroidManifest.xml:31:17-49
+141            <meta-data
+141-->[androidx.lifecycle:lifecycle-process:2.6.1] /Users/alby/.gradle/caches/transforms-3/6965ddfd7c9bb67e76de74f23369d3cb/transformed/lifecycle-process-2.6.1/AndroidManifest.xml:29:13-31:52
+142                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+142-->[androidx.lifecycle:lifecycle-process:2.6.1] /Users/alby/.gradle/caches/transforms-3/6965ddfd7c9bb67e76de74f23369d3cb/transformed/lifecycle-process-2.6.1/AndroidManifest.xml:30:17-78
+143                android:value="androidx.startup" />
+143-->[androidx.lifecycle:lifecycle-process:2.6.1] /Users/alby/.gradle/caches/transforms-3/6965ddfd7c9bb67e76de74f23369d3cb/transformed/lifecycle-process-2.6.1/AndroidManifest.xml:31:17-49
+144            <meta-data
+144-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/alby/.gradle/caches/transforms-3/a916dcd0a76c646859857390ab72a1c7/transformed/profileinstaller-1.3.0/AndroidManifest.xml:29:13-31:52
+145                android:name="androidx.profileinstaller.ProfileInstallerInitializer"
+145-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/alby/.gradle/caches/transforms-3/a916dcd0a76c646859857390ab72a1c7/transformed/profileinstaller-1.3.0/AndroidManifest.xml:30:17-85
+146                android:value="androidx.startup" />
+146-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/alby/.gradle/caches/transforms-3/a916dcd0a76c646859857390ab72a1c7/transformed/profileinstaller-1.3.0/AndroidManifest.xml:31:17-49
+147        </provider>
+148
+149        <receiver
+149-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/alby/.gradle/caches/transforms-3/a916dcd0a76c646859857390ab72a1c7/transformed/profileinstaller-1.3.0/AndroidManifest.xml:34:9-52:20
+150            android:name="androidx.profileinstaller.ProfileInstallReceiver"
+150-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/alby/.gradle/caches/transforms-3/a916dcd0a76c646859857390ab72a1c7/transformed/profileinstaller-1.3.0/AndroidManifest.xml:35:13-76
+151            android:directBootAware="false"
+151-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/alby/.gradle/caches/transforms-3/a916dcd0a76c646859857390ab72a1c7/transformed/profileinstaller-1.3.0/AndroidManifest.xml:36:13-44
+152            android:enabled="true"
+152-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/alby/.gradle/caches/transforms-3/a916dcd0a76c646859857390ab72a1c7/transformed/profileinstaller-1.3.0/AndroidManifest.xml:37:13-35
+153            android:exported="true"
+153-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/alby/.gradle/caches/transforms-3/a916dcd0a76c646859857390ab72a1c7/transformed/profileinstaller-1.3.0/AndroidManifest.xml:38:13-36
+154            android:permission="android.permission.DUMP" >
+154-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/alby/.gradle/caches/transforms-3/a916dcd0a76c646859857390ab72a1c7/transformed/profileinstaller-1.3.0/AndroidManifest.xml:39:13-57
+155            <intent-filter>
+155-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/alby/.gradle/caches/transforms-3/a916dcd0a76c646859857390ab72a1c7/transformed/profileinstaller-1.3.0/AndroidManifest.xml:40:13-42:29
+156                <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE" />
+156-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/alby/.gradle/caches/transforms-3/a916dcd0a76c646859857390ab72a1c7/transformed/profileinstaller-1.3.0/AndroidManifest.xml:41:17-91
+156-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/alby/.gradle/caches/transforms-3/a916dcd0a76c646859857390ab72a1c7/transformed/profileinstaller-1.3.0/AndroidManifest.xml:41:25-88
+157            </intent-filter>
+158            <intent-filter>
+158-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/alby/.gradle/caches/transforms-3/a916dcd0a76c646859857390ab72a1c7/transformed/profileinstaller-1.3.0/AndroidManifest.xml:43:13-45:29
+159                <action android:name="androidx.profileinstaller.action.SKIP_FILE" />
+159-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/alby/.gradle/caches/transforms-3/a916dcd0a76c646859857390ab72a1c7/transformed/profileinstaller-1.3.0/AndroidManifest.xml:44:17-85
+159-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/alby/.gradle/caches/transforms-3/a916dcd0a76c646859857390ab72a1c7/transformed/profileinstaller-1.3.0/AndroidManifest.xml:44:25-82
+160            </intent-filter>
+161            <intent-filter>
+161-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/alby/.gradle/caches/transforms-3/a916dcd0a76c646859857390ab72a1c7/transformed/profileinstaller-1.3.0/AndroidManifest.xml:46:13-48:29
+162                <action android:name="androidx.profileinstaller.action.SAVE_PROFILE" />
+162-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/alby/.gradle/caches/transforms-3/a916dcd0a76c646859857390ab72a1c7/transformed/profileinstaller-1.3.0/AndroidManifest.xml:47:17-88
+162-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/alby/.gradle/caches/transforms-3/a916dcd0a76c646859857390ab72a1c7/transformed/profileinstaller-1.3.0/AndroidManifest.xml:47:25-85
+163            </intent-filter>
+164            <intent-filter>
+164-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/alby/.gradle/caches/transforms-3/a916dcd0a76c646859857390ab72a1c7/transformed/profileinstaller-1.3.0/AndroidManifest.xml:49:13-51:29
+165                <action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION" />
+165-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/alby/.gradle/caches/transforms-3/a916dcd0a76c646859857390ab72a1c7/transformed/profileinstaller-1.3.0/AndroidManifest.xml:50:17-95
+165-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/alby/.gradle/caches/transforms-3/a916dcd0a76c646859857390ab72a1c7/transformed/profileinstaller-1.3.0/AndroidManifest.xml:50:25-92
+166            </intent-filter>
+167        </receiver>
+168
+169        <service
+169-->[com.google.android.datatransport:transport-backend-cct:3.1.8] /Users/alby/.gradle/caches/transforms-3/5d3e8aec99f1fb0cb348445c949c4001/transformed/transport-backend-cct-3.1.8/AndroidManifest.xml:28:9-34:19
+170            android:name="com.google.android.datatransport.runtime.backends.TransportBackendDiscovery"
+170-->[com.google.android.datatransport:transport-backend-cct:3.1.8] /Users/alby/.gradle/caches/transforms-3/5d3e8aec99f1fb0cb348445c949c4001/transformed/transport-backend-cct-3.1.8/AndroidManifest.xml:29:13-103
+171            android:exported="false" >
+171-->[com.google.android.datatransport:transport-backend-cct:3.1.8] /Users/alby/.gradle/caches/transforms-3/5d3e8aec99f1fb0cb348445c949c4001/transformed/transport-backend-cct-3.1.8/AndroidManifest.xml:30:13-37
+172            <meta-data
+172-->[com.google.android.datatransport:transport-backend-cct:3.1.8] /Users/alby/.gradle/caches/transforms-3/5d3e8aec99f1fb0cb348445c949c4001/transformed/transport-backend-cct-3.1.8/AndroidManifest.xml:31:13-33:39
+173                android:name="backend:com.google.android.datatransport.cct.CctBackendFactory"
+173-->[com.google.android.datatransport:transport-backend-cct:3.1.8] /Users/alby/.gradle/caches/transforms-3/5d3e8aec99f1fb0cb348445c949c4001/transformed/transport-backend-cct-3.1.8/AndroidManifest.xml:32:17-94
+174                android:value="cct" />
+174-->[com.google.android.datatransport:transport-backend-cct:3.1.8] /Users/alby/.gradle/caches/transforms-3/5d3e8aec99f1fb0cb348445c949c4001/transformed/transport-backend-cct-3.1.8/AndroidManifest.xml:33:17-36
+175        </service>
+176        <service
+176-->[com.google.android.datatransport:transport-runtime:3.1.8] /Users/alby/.gradle/caches/transforms-3/4e5422fcd44780cf7e44d23d9e8e9fce/transformed/transport-runtime-3.1.8/AndroidManifest.xml:26:9-30:19
+177            android:name="com.google.android.datatransport.runtime.scheduling.jobscheduling.JobInfoSchedulerService"
+177-->[com.google.android.datatransport:transport-runtime:3.1.8] /Users/alby/.gradle/caches/transforms-3/4e5422fcd44780cf7e44d23d9e8e9fce/transformed/transport-runtime-3.1.8/AndroidManifest.xml:27:13-117
+178            android:exported="false"
+178-->[com.google.android.datatransport:transport-runtime:3.1.8] /Users/alby/.gradle/caches/transforms-3/4e5422fcd44780cf7e44d23d9e8e9fce/transformed/transport-runtime-3.1.8/AndroidManifest.xml:28:13-37
+179            android:permission="android.permission.BIND_JOB_SERVICE" >
+179-->[com.google.android.datatransport:transport-runtime:3.1.8] /Users/alby/.gradle/caches/transforms-3/4e5422fcd44780cf7e44d23d9e8e9fce/transformed/transport-runtime-3.1.8/AndroidManifest.xml:29:13-69
+180        </service>
+181
+182        <receiver
+182-->[com.google.android.datatransport:transport-runtime:3.1.8] /Users/alby/.gradle/caches/transforms-3/4e5422fcd44780cf7e44d23d9e8e9fce/transformed/transport-runtime-3.1.8/AndroidManifest.xml:32:9-34:40
+183            android:name="com.google.android.datatransport.runtime.scheduling.jobscheduling.AlarmManagerSchedulerBroadcastReceiver"
+183-->[com.google.android.datatransport:transport-runtime:3.1.8] /Users/alby/.gradle/caches/transforms-3/4e5422fcd44780cf7e44d23d9e8e9fce/transformed/transport-runtime-3.1.8/AndroidManifest.xml:33:13-132
+184            android:exported="false" />
+184-->[com.google.android.datatransport:transport-runtime:3.1.8] /Users/alby/.gradle/caches/transforms-3/4e5422fcd44780cf7e44d23d9e8e9fce/transformed/transport-runtime-3.1.8/AndroidManifest.xml:34:13-37
+185    </application>
+186
+187</manifest>

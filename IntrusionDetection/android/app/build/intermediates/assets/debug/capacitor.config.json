@@ -1,0 +1,13 @@
+{
+	"appId": "com.IntrusionDetection.AMDB",
+	"appName": "IntrusionDetection",
+	"webDir": "dist",
+	"server": {
+		"androidScheme": "http"
+	},
+	"plugins": {
+		"LocalNotifications": {
+			"iconColor": "#488AFF"
+		}
+	}
+}

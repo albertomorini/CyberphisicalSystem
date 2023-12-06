@@ -1,0 +1,3 @@
+com.IntrusionDetection.AMDB.test
+style WhiteBackgroundDialogTheme
+style WhiteBackgroundTheme
