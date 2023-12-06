@@ -47,11 +47,11 @@ _Fig1: flowchart of designed architecture_
 ### Technical specifications
 
 The **backend** is entirely developed in Python.
-- *Development and testing were carried out using Python 3.11.4.*
+- *Development and testing with Python 3.11.4.*
 
 The **frontend** is a web application created with <a href="https://ionicframework.com/">Ionic framework</a> and compiled for Android.
 - *Development and testing were conducted with Ionic 7.1.1.*
-- *The Android app was built and tested on Android 14 (September 5, 2023) and emulated using API34 in Android Studio Giraffe 2022.3.1 Patch 2.*
+- *Android testing with Android 14 (5 sept 2023) and API34 emulated in Android Studio Giraffe 2022.3.1 Patch 2*
 
 <div style="page-break-after: always;"></div>
 
@@ -135,7 +135,7 @@ If the ID does not exist in the matrix, or if the value in the matrix is `False`
 
 We have divided the evaluation into batches to calculate a `BATCH_RATIO` of threat. Additionally, we have fixed a threshold to ignore false positives
 
- Specifically, if a batch has a `BATCH_RATIO` lower than a certain threshold, we consider those messages as false positives. Instead of notifying users of potentially unknown messages, we update the matrix by setting those false positives to true.
+ Specifically, if a batch has a `BATCH_RATIO` lower than a certain threshold, we consider those messages as false positives. Instead of notifying users of potentially unusual messages, we update the matrix by setting those false positives to true.
 
 ```python
 def update_matrix(matrix, ids, dataset, adding_ids):
@@ -179,7 +179,7 @@ The packet Content-Type has a JSON structure.
     "msg_length": int,
     "msg": "VARCHAR",
     "id": id_CANComponent,
-    "kind": "ATTACK/UNKNOWN",
+    "kind": "ATTACK/UNUSUAL",
     "dataset": "DoS/Fuzzy/Impersonate/..."
 }
 ```
@@ -189,7 +189,7 @@ _Packet structure_
 - **msg_length**: Indicates the length of the message.
 - **msg**: Contains the actual message content.
 - **id**: Represents the ID of the CAN component.
-- **kind**: Describes whether the message is categorized as "ATTACK" or "UNKNOWN".
+- **kind**: Describes whether the message is categorized as "ATTACK" or "UNUSUAL".
 - **dataset**: Specifies the origin dataset, such as "DoS," "Fuzzy," "Impersonate," etc.
 
 
@@ -291,7 +291,7 @@ async function showLocalNotification(id, kindMessage = "NODATA", CANMessage) {
         let tmpBody;
         if (kindMessage == "ATTACK") {
             tmpBody = "Invalid messages have been detected. This may indicate a bus error or an attack."
-        } else if (kindMessage == "UNKNOWN") {
+        } else if (kindMessage == "UNUSUAL") {
             tmpBody = "Unusual patterns of messages have been detected. This may be the result of unusual activity, or it may indicate an attack."
         }
 
