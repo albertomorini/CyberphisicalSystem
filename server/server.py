@@ -59,12 +59,13 @@ class GetHandler(BaseHTTPRequestHandler):
         ## FOR TEST ONLY: every request we send the next detection
         global indexMessage
         if(indexMessage<len(detections)):
-            message["data"] = detections[indexMessage]
+            message["data"].append(detections[indexMessage])
             indexMessage += 1 #increment
         else:
             message["data"]="null"
         parsed = json.dumps(message)
         self.wfile.write(bytes(parsed, "utf8"))
+        message["data"]=[] ##JUST FOR TESTING
 
 
 ## START HTTP SERVER

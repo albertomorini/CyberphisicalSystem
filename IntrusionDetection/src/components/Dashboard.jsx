@@ -1,4 +1,4 @@
-import { IonButton, IonCol, IonContent, IonInput, IonItem, IonLabel, IonRow } from '@ionic/react';
+import { IonButton, IonCol, IonContent, IonItemDivider,IonInput, IonItem, IonLabel, IonRow } from '@ionic/react';
 import { useEffect, useState } from 'react';
 import moment from "moment";
 import { Storage } from '@ionic/storage';
@@ -50,32 +50,27 @@ const Dashboard = () => {
             mode: "cors",
             method: "GET"
         }).then(res => res.json()).then(async res => {
+            console.log(res);
             if (res.data != "null") { //Server will send null string when ended the detections
                 //DATA RECEIVED
-                showLocalNotification(res.data.id, res.data.kind, res.data.msg); //trigger the android notification
+                res.data.forEach(message => { //res.data is an array of message, forEach one show a notification
+                    showLocalNotification(message.id, message.kind, message.msg); //trigger the android notification
 
-                res.data.receptionTS = moment().format("DD/MM/YYYY HH:mm:ss"); //baptize the reception timestamp
+                    message.receptionTS = moment().format("DD/MM/YYYY HH:mm:ss"); //baptize the reception timestamp
+                })
 
                 // STORE DATA INTO CACHE AND UPDATE UI            
                 const store = new Storage();
                 store.create();
                 let arrayStorico = await store.get('historyData');
-                if(arrayStorico == null){
-                    arrayStorico=[]
+                if (arrayStorico == null) {
+                    arrayStorico = [];
                 }
                 let tmpArray = Array.from(arrayStorico).concat(res.data); //cast into a proper array
                 store.set('historyData', tmpArray); //save new array with oldData.append(newData) --> where newData is an array of detection
 
-            // STORE DATA INTO CACHE AND UPDATE UI            
-            const store = new Storage();
-            store.create();
-            let arrayStorico = await store.get('historyData');
-            if(arrayStorico==null){
-                arrayStorico=[];
+                setMessages(arrayStorico); //update state to show into UI
             }
-            let tmpArray = Array.from(arrayStorico).concat(res.data); //cast into a proper array
-            store.set('historyData', tmpArray); //save new array with oldData.append(newData) --> where newData is an array of detection
-
         }).catch(err => { //visible with logcat
             console.log("Communication error: " + err);
         });
@@ -89,7 +84,7 @@ const Dashboard = () => {
         setMessages([])
     }
     // Store socket server into cache
-    function storeSocketServer(){
+    function storeSocketServer() {
         const store = new Storage();
         store.create();
         store.set("socketServer", SocketServer);
@@ -97,27 +92,27 @@ const Dashboard = () => {
     /**
      * ASK Permission for local notification
      */
-    async function askPermissionLN(){
+    async function askPermissionLN() {
 
         let x = await LocalNotifications.requestPermissions();
 
 
         let chkPermission = await LocalNotifications.checkPermissions();
-        console.log("PERMISSION: "+chkPermission);
+        console.log("PERMISSION: " + chkPermission);
         console.log(chkPermission);
-        if (chkPermission == null || chkPermission == "prompt-with-rationale" || chkPermission == "prompt"){ //user have to choiche
+        if (chkPermission == null || chkPermission == "prompt-with-rationale" || chkPermission == "prompt") { //user have to choiche
             LocalNotifications.requestPermissions();
         }
     }
 
-    function checkPermissions(){
+    function checkPermissions() {
         //TODO: check if already asked
         LocalNotifications.requestPermissions();
     }
 
     useEffect(() => {
         checkPermissions();
-       getDataFromServer();
+        getDataFromServer();
         setInterval(() => {
             getDataFromServer();
         }, pollingTime); //then start the iteration to retrieve data
@@ -159,7 +154,7 @@ const Dashboard = () => {
             <IonRow>
                 <IonCol>
                     <IonLabel>Server config</IonLabel>
-                    <IonInput  mode='md' type='text' fill='outline' placeholder='http://localhost:1199' onIonInput={(ev) => setSocketServer(ev.target.value)} />
+                    <IonInput mode='md' type='text' fill='outline' placeholder='http://localhost:1199' onIonInput={(ev) => setSocketServer(ev.target.value)} />
                 </IonCol>
                 <IonCol size='2'>
                     <IonButton style={{ marginTop: "20px", height: "70%" }} expand='block' color="success" onClick={() => storeSocketServer()}>SAVE</IonButton>
