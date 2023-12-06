@@ -60,7 +60,7 @@ def analyze_traffic(matrix, ids, dataset):
         'msg_length': int'
         'msg': '...',
         'id': '...',
-        'kind': "ATTACK/UNKNOWN"
+        'kind': "ATTACK/UNUSUAL"
     }
     """
 
@@ -93,7 +93,7 @@ def analyze_traffic(matrix, ids, dataset):
                         "msg_length": msg_length,
                         "msg": msg,
                         "id": id,
-                        "kind": "UNKNOWN"
+                        "kind": "UNUSUAL"
                     }
                     saved_msg.append(json)
                 if error_ratio < 0.02:
