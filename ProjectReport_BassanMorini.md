@@ -49,7 +49,7 @@ _Fig1: flowchart of designed architecture_
 The **backend** is entirely developed in Python.
 - *Development and testing were carried out using Python 3.11.4.*
 
-The **frontend** is a web application created with the <a href="https://ionicframework.com/">Ionic framework</a> and compiled for Android.
+The **frontend** is a web application created with <a href="https://ionicframework.com/">Ionic framework</a> and compiled for Android.
 - *Development and testing were conducted with Ionic 7.1.1.*
 - *The Android app was built and tested on Android 14 (September 5, 2023) and emulated using API34 in Android Studio Giraffe 2022.3.1 Patch 2.*
 
@@ -171,7 +171,7 @@ We took this decision for many aspects:
 
 The server ''sends'' messages to clients retrieved by the Detection Algorithm, including the property of which dataset the detection is from. 
 <br/>
-The packet content type has a JSON structure.
+The packet Content-Type has a JSON structure.
 
 ```JSON
 {
@@ -211,7 +211,7 @@ import DetectionAlgorithm # the algorithm explained before
 
 For simplicity, as soon as the server starts, it launches the detection algorithm on every provided dataset, then saves the detections in a local variable.
 
-The server provides clients with a limited number of detections, which is indicated at startup via command line by the user. We made this decision to provide detections for every dataset in a reduced time.  
+The Server provides to clients a limited number of detections, which is indicated at startup via command line by the user. We made this decision to provide detections for every dataset in a reduced time.  
 <br/>
 *If none parameter is provided, the default number of message for every dataset is 10.*
 
@@ -241,11 +241,9 @@ for i in detections:    ## for each attack
     return AllDetections
 ```
 
-Here, the server processes detections for each type of attack (DoS, Fuzzy, Impersonate), adds the respective dataset information to each detection, and appends them to the AllDetections list. The list is then returned for further use in the server.
-
 ### Client application
 
-The mobile application is developed using the Ionic framework (in React) and then compiled into an Android APK app.<br/>
+The mobile application is developed using Ionic framework (in React) and then compiled as an Android APK app.<br/>
 *For this test, an iOS app hasn't been created.*
 
 We added some libraries: 
@@ -258,18 +256,17 @@ We added some libraries:
 
 #### Life cycle
 
-The app begins by requesting permission to use local notifications, as shown in Fig3.
+App starts asking the permission, then start polling the server which socket needs to be configured by user.
 
 ![Ask4Permissions](images/notificationPermission.png)
 _Fig3: App asking for permission for local notification_
 
-
-Once the correct IP address and port of the HTTP server are provided, the client retrieves and stores data into the cache. Subsequently, the app automatically updates the history list using "React State," as illustrated in Fig4.
+As soon IP address and port of the HTTP server are correct, the client retrieves and stores data into the cache; after that, with a "React State" automatically update  the history list.
 
 ![Working](images/working.png)
 _Fig4: Mobile app polling the server and retrieving data_
 
-Furthermore, with every new piece of data, the app pushes a new alert to the notification center of Android.
+At every new message, apps push in the notification center of Android the new alert.
 ![NotificationBar](images/notificationBar.png)
 _Fig5: The notification messages in the notification bar_
 
@@ -277,8 +274,7 @@ _Fig5: The notification messages in the notification bar_
 
 #### Messages
 
-Upon receiving each detection, the client assigns a timestamp called "receptionTS" to the message. This information can be valuable in the future for measuring potential delays or latency in the system. The code snippet below illustrates this process:
-
+At every detection received, client baptize the message with a timestamp (called "receptionTS"). This information can be very useful in future thus to measure potential delay/latency of the system.
 ```js
 res.data.forEach(message => { //res.data is an array of message, forEach one show a notification
     showLocalNotification(message.id, message.kind, message.msg); //trigger the android notification
@@ -287,7 +283,8 @@ res.data.forEach(message => { //res.data is an array of message, forEach one sho
 })
 ```
 
-Local notifications, as well as the detection history, are categorized into two groups or kinds: "attacks" and "unkonwn traffic", similar to the approach in the paper. This information is defined by the Detection Algorithm, and the app then displays the respective message accordingly.
+Local notifications, as well as the detection history, are categorized into two groups/kinds: "attacks" and "unkonwn traffic", as did in the paper. <br/>
+This information is defined by the Detection Algorithm and than the app basically shows the respective message.
 
 ```js
 async function showLocalNotification(id, kindMessage = "NODATA", CANMessage) {
@@ -315,7 +312,8 @@ async function showLocalNotification(id, kindMessage = "NODATA", CANMessage) {
 ```
 
 
-In the mobile app, detections have a red background if categorized as "Attack" and a light grey background if identified as "Unusual traffic," as illustrated in Fig2. This visual distinction aids users in quickly recognizing the severity of each detection.
+In the mobile app, detections have a red background if categorized as "Attack" and a light grey background if identified as "Unusual traffic". <br/>
+This visual distinction aids users in quickly recognizing the severity of each detection.
 
 <div style="page-break-after: always;"></div>
 
@@ -324,12 +322,8 @@ In the mobile app, detections have a red background if categorized as "Attack" a
 In conclusion, some critical thought about the system created:
 
 - It is crucial that the dataset used to build the matrix is representative, comprehensive, and free of attacks. The algorithm's performance largely depends on the quality of the dataset.
-
-- The only negative observation pertains to the energy consumption of Wi-Fi; Bluetooth is lighter and likely available on a greater number of vehicles.
-
+- The only negative observation that we need to make is about energy consumption of Wi-Fi, Bluetooth is lighter and probably available on more vehicles.
 - HTTP is an insecure protocol; we adopt it for simplicity but strongly recommend using an SSL certificate (even a self-signed one) to enable HTTPS.
-
-
 
 ### Data of detection
 
