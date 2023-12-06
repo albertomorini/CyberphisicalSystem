@@ -193,7 +193,7 @@ _Packet structure_
 - **dataset**: Specifies the origin dataset, such as "DoS," "Fuzzy," "Impersonate," etc.
 
 
-**DISCLAIMER**: to simulate a real life scenario, server sends the client a new detection at every request received. <br/>
+**DISCLAIMER**: to simulate a real life scenario, server sends to client a new detection at every request received. <br/>
 **In an effective scenario, the server will make detections available in real-time as soon as they are identified.**
 
 Therefore, we allow the client to define the polling time to check the server for new data. Currently, this is set to every 5 seconds.
@@ -250,7 +250,7 @@ We added some libraries:
 
 - `@ionic/storage` to store the detection history in the app's cache.
 - `@capacitor/local-notifications` to trigger native mobile notifications.
-- `moment.js` for easy manipulation of datetime formats.
+- `moment.js` for an easy manipulation of datetime formats.
 
 <div style="page-break-after: always;"></div>
 
