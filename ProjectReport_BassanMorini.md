@@ -1,6 +1,6 @@
 # IDS for CAN - Replication project
 
-> First project of Cyber Physical System and IoT Security (course of Cybersecurity) - <a href="https://www.unipd.it/en/educational-offer/second-cycle-degree/science?tipo=LM&scuola=SC&ordinamento=2021&key=SC2598&cg=science">*Master degree in Computer Science* </a> 
+> First project of Cyber Physical System and IoT Security - <a href="https://www.unipd.it/en/educational-offer/second-cycle-degree/science?tipo=LM&scuola=SC&ordinamento=2021&key=SC2598&cg=science">*Master degree in Computer Science* </a> 
 
 Replication of the paper - IDS for CAN: A Practical Intrusion Detection System for CAN Bus Security
 
@@ -8,12 +8,12 @@ Replication of the paper - IDS for CAN: A Practical Intrusion Detection System f
 - link to the dataset: https://ocslab.hksecurity.net/Dataset/CAN-intrusion-dataset (section 1.3)
 
 **Authors:** 
-- Davide Bassan (mat. ) - davide.bassan.1@studenti.unipd.it
+- Davide Bassan (mat. 2076779) - davide.bassan.1@studenti.unipd.it
 - Alberto Morini (mat. 2107783) - alberto.morini@studenti.unipd.it
 
 **Date:** 02 December 2023
 
-**ALL SOURCE CODE IS PUBLIC ON GITHUB (in various branch)**: https://github.com/albertomorini/CyberphisicalSystem <br/>
+**ALL SOURCE CODE IS PUBLIC ON GITHUB (in various branches)**: https://github.com/albertomorini/CyberphisicalSystem <br/>
 _For storage reasons we do not provide the datasets of the paper in this repository_
 
 ## Table of contents
@@ -29,16 +29,16 @@ _For storage reasons we do not provide the datasets of the paper in this reposit
 
 ## Abstract
 
-We have to replicate what done in the paper linked before, so, we can divide the job in two side:
+We aimed to replicate the work presented in the paper titled "IDS for CAN: A Practical Intrusion Detection System for CAN Bus Security." We have divided the work into two parts:
 
-1. **Intrusion detection**: which analyze the datasets and identify potential threats
-2. **Mobile app**: that via some notifications, alerts the user of the threat detected
+1. **Intrusion detection**: which analyzes the datasets and identifies potential threats.
+2. **Mobile app**:  that, through notifications, alerts the user of the detected threat.
 
 ### Architecture
 
-We designed a simple architecture, made by backend (server with detection algorithm) and frontend (webapp).
+We designed a straightforward architecture consisting of a backend (server with a detection algorithm) and a frontend (web app).
 
-In short, the backend analyze the datasets and after identify the threats, make them available to clients through an HTTP server.
+In brief, the backend analyzes the datasets and, upon identifying threats, makes them accessible to clients through an HTTP server.
 
 
 ![Flowchart](images/flowchart.jpg)
@@ -46,12 +46,12 @@ _Fig1: flowchart of designed architecture_
 
 ### Technical specifications
 
-The **backend** is made entirely in Python
-- *Building and testing has been made with Python 3.11.4*
+The **backend** is entirely developed in Python.
+- *Development and testing were carried out using Python 3.11.4.*
 
-The **frontend** is a web application made with <a href="https://ionicframework.com/">Ionic framework</a> and compiled for Android
-- *Building and testing has been made with Ionic 7.1.1*
-- *Android 14 (5 sept 2023) and API34 emulated in Android Studio Giraffe 2022.3.1 Patch 2*
+The **frontend** is a web application created with the <a href="https://ionicframework.com/">Ionic framework</a> and compiled for Android.
+- *Development and testing were conducted with Ionic 7.1.1.*
+- *The Android app was built and tested on Android 14 (September 5, 2023) and emulated using API34 in Android Studio Giraffe 2022.3.1 Patch 2.*
 
 <div style="page-break-after: always;"></div>
 
@@ -77,7 +77,7 @@ def extract_id(file_path):
 
 Next, we initialized a matrix of size `N*N`, where `N` is the number of unique IDs that appear in the `Attack_free_dataset.txt` dataset, with all values set to `False`.
 
-Then, we populated the matrix, setting those IDs to True that appear one after the other in the dataset. This because we assume that the traffic on the CAN bus is highly recurrent.
+Then, we populated the matrix, setting those IDs to `True` that appear one after the other in the dataset. This because we assume that the traffic on the CAN bus is highly recurrent.
 
 ```python
 def generate_matrix(ids):
@@ -108,7 +108,7 @@ We have evaluated the algorithm on three different subset of frames
 - `Fuzzy_attack_dataset.txt`
 - `Impersonation_attack_dataset.txt`
 
-To achieve this, we checked if subsequent IDs appeared in one of these subsets, which is also present in the `Attack_free_dataset.txt` dataset. In other words, in the matrix built previously, if the value is `True` at position `id, next_id`, then the ID is considered to have appeared after the other.
+To accomplish this, we checked if subsequent IDs appeared in one of these subsets, which is also present in the `Attack_free_dataset.txt` dataset. In other words, in the matrix built previously, if the value is `True` at position `[id][next_id]`, then the IDs is considered to have appeared after the other.
 
 If the ID does not exist in the matrix, or if the value in the matrix is `False`, it is added to a list of potential dangerous messages.
 
@@ -133,10 +133,9 @@ If the ID does not exist in the matrix, or if the value in the matrix is `False`
     [...]
 ```
 
-We have divided the evaluation in batch, in order to calculate a BATCH_RATIO of threat, we have also fixed a threshold, in order to ignore false positives.
+We have divided the evaluation into batches to calculate a `BATCH_RATIO` of threat. Additionally, we have fixed a threshold to ignore false positives
 
-In fact, if a batch have a BATCH_RATIO lower than a certain threshold we have considered those messages as false positives, and instead of notify the users of potentially unknown messages, we have update the matrix setting to true those false positives.
-<div style="page-break-after: always;"></div>
+ Specifically, if a batch has a `BATCH_RATIO` lower than a certain threshold, we consider those messages as false positives. Instead of notifying users of potentially unknown messages, we update the matrix by setting those false positives to true.
 
 ```python
 def update_matrix(matrix, ids, dataset, adding_ids):
@@ -163,49 +162,60 @@ def update_matrix(matrix, ids, dataset, adding_ids):
 Otherwise as the paper, we opted to create a web-application which communicate to server via HTTP packets.
 
 We took this decision for many aspects:
-- **Portability**: web application can be easily build for both mobile OS major(iOS and Android); representing a huge benefit in the maintainability and extendability of the code
-- **Real life scenario**: we imagined the backend detection system installed in the cars, maybe integrated with Android Auto or CarPlay, which systems can communicate via Wi-Fi.
+- **Portability**: Web applications can be easily built for major mobile operating systems (iOS and Android), providing a significant advantage in code maintainability and extensibility.
+- **Real life scenario**: We envisioned the backend detection system installed in cars, possibly integrated with Android Auto or CarPlay, where systems can communicate via Wi-Fi.
 
 
 ### Architecture
 
-Server ''sends'' to clients the message retrieved by the Detection Algorithm, adding the property of which dataset the detection is from. <br/>
-The Content-type of packets has a JSON structure.
+
+The server ''sends'' messages to clients retrieved by the Detection Algorithm, including the property of which dataset the detection is from. 
+<br/>
+The packet content type has a JSON structure.
 
 ```JSON
 {
-    "timestamp": integer,
+    "timestamp": int,
     "msg_length": int,
     "msg": "VARCHAR",
     "id": id_CANComponent,
-    "kind": "Sospicious/Unknown",
+    "kind": "ATTACK/UNKNOWN",
     "dataset": "DoS/Fuzzy/Impersonate/..."
 }
 ```
 _Packet structure_
 
-**DISCLAIMER**: to simulate a real life scenario, server sends the client a new detection at every request received. <br/>
-**In an effective scenario, server will makes available detections in real time as soon as they are identified**
+- **timestamp**: Represents the time of the detection.
+- **msg_length**: Indicates the length of the message.
+- **msg**: Contains the actual message content.
+- **id**: Represents the ID of the CAN component.
+- **kind**: Describes whether the message is categorized as "ATTACK" or "UNKNOWN".
+- **dataset**: Specifies the origin dataset, such as "DoS," "Fuzzy," "Impersonate," etc.
 
-So, we let the client define the polling time to check server for new data.
-*Actually every 5 seconds*
+
+**DISCLAIMER**: to simulate a real life scenario, server sends the client a new detection at every request received. <br/>
+**In an effective scenario, the server will make detections available in real-time as soon as they are identified.**
+
+Therefore, we allow the client to define the polling time to check the server for new data. Currently, this is set to every 5 seconds.
 
 ### Server HTTP
 
-Made in Python and default libraries:
+Created using Python and default libraries:
+
 ```python
 import json #to parse/stringify JSON
 from http.server import BaseHTTPRequestHandler, HTTPServer # HTTP server
 import sys # to get command line params
 import DetectionAlgorithm # the algorithm explained before
-``````
+```
 
-For simplicity, server as soon as it started, launch the detection algorithm on every dataset provided; then, save the detections in a local variable.
+For simplicity, as soon as the server starts, it launches the detection algorithm on every provided dataset, then saves the detections in a local variable.
 
-Server provides to clients a limited number of detections, indicated at the startup via command line by user. We made this decision in way to provide detections of every dataset in a reduced time. <br/>
+The server provides clients with a limited number of detections, which is indicated at startup via command line by the user. We made this decision to provide detections for every dataset in a reduced time.  
+<br/>
 *If none parameter is provided, the default number of message for every dataset is 10.*
 
-For example: `$ python3 server.py 5` --> will send 15 packets in total to the client (5 detection for each dataset)
+For example: `$ python3 server.py 5` --> will send a total of 15 packets to the client (5 detections for each dataset)
 
 ![DifferentDatasets](images/differentDataset.png)
 _Fig2: Entire system running_
@@ -214,7 +224,8 @@ _Fig2: Entire system running_
 
 #### Adding the dataset
 
-As said before, server also adds the origin dataset into the detections:
+As mentioned before, the server also adds the origin dataset to the detections:
+
 ```python
 detections = {
     "DoS" : DetectionAlgorithm.analyze_traffic(matrix,aux_ids, datasetExtractions["DoS"]),
@@ -230,33 +241,35 @@ for i in detections:    ## for each attack
     return AllDetections
 ```
 
+Here, the server processes detections for each type of attack (DoS, Fuzzy, Impersonate), adds the respective dataset information to each detection, and appends them to the AllDetections list. The list is then returned for further use in the server.
 
 ### Client application
 
-The mobile application is made with Ionic framework (in React) and then compiled as Android APK app.<br/>
-*For this test, iOS app hasn't been made.*
+The mobile application is developed using the Ionic framework (in React) and then compiled into an Android APK app.<br/>
+*For this test, an iOS app hasn't been created.*
 
 We added some libraries: 
 
-- `@ionic/storage` to store into app's cache the detection history
-- `@capacitor/local-notifications` in way to trigger a native mobile's notification
-- `moment.js` to have an easily manipulation of datetime format
+- `@ionic/storage` to store the detection history in the app's cache.
+- `@capacitor/local-notifications` to trigger native mobile notifications.
+- `moment.js` for easy manipulation of datetime formats.
 
 <div style="page-break-after: always;"></div>
 
 #### Life cycle
 
-App starts asking the permission, then start polling the server which socket needs to be configured by user.
+The app begins by requesting permission to use local notifications, as shown in Fig3.
+
 ![Ask4Permissions](images/notificationPermission.png)
-_Fig3: App asking for permission to local notification_
+_Fig3: App asking for permission for local notification_
 
 
-As soon IP address and port of the HTTP server are correct, client retrieve data and store it into the cache, after that, with a "React State" automatically update  the history list.
+Once the correct IP address and port of the HTTP server are provided, the client retrieves and stores data into the cache. Subsequently, the app automatically updates the history list using "React State," as illustrated in Fig4.
 
 ![Working](images/working.png)
 _Fig4: Mobile app polling the server and retrieving data_
 
-Also at every new data, apps push in the notification center of Android the new alert.
+Furthermore, with every new piece of data, the app pushes a new alert to the notification center of Android.
 ![NotificationBar](images/notificationBar.png)
 _Fig5: The notification messages in the notification bar_
 
@@ -264,7 +277,8 @@ _Fig5: The notification messages in the notification bar_
 
 #### Messages
 
-At every detection received, client baptize the message with a timestamp (called "receptionTS"). This information can be very useful in future thus to measure potential delay/latency of the system.
+Upon receiving each detection, the client assigns a timestamp called "receptionTS" to the message. This information can be valuable in the future for measuring potential delays or latency in the system. The code snippet below illustrates this process:
+
 ```js
 res.data.forEach(message => { //res.data is an array of message, forEach one show a notification
     showLocalNotification(message.id, message.kind, message.msg); //trigger the android notification
@@ -273,8 +287,7 @@ res.data.forEach(message => { //res.data is an array of message, forEach one sho
 })
 ```
 
-Local notifications (as the detections history) are divided in two group/kind, as the paper did: "attacks" and "unusual traffic" <br/>
-This information is defined by the Detection Algorithm and than the app basically shows the respective message.
+Local notifications, as well as the detection history, are categorized into two groups or kinds: "attacks" and "unusual traffic", similar to the approach in the paper. This information is defined by the Detection Algorithm, and the app then displays the respective message accordingly.
 
 ```js
 async function showLocalNotification(id, kindMessage = "NODATA", CANMessage) {
@@ -301,7 +314,8 @@ async function showLocalNotification(id, kindMessage = "NODATA", CANMessage) {
     }
 ```
 
-Detections have a red background in case of "Attack" and light grey if threats are identified as "Unusual traffic". (*See it in Fig2*)
+
+In the mobile app, detections have a red background if categorized as "Attack" and a light grey background if identified as "Unusual traffic," as illustrated in Fig2. This visual distinction aids users in quickly recognizing the severity of each detection.
 
 <div style="page-break-after: always;"></div>
 
@@ -309,13 +323,22 @@ Detections have a red background in case of "Attack" and light grey if threats a
 
 In conclusion, some critical thought about the system created:
 
-- The only negative observation that we need to make is about energy consumption of Wi-Fi, Bluetooth is lighter and probably available on more vehicles.
-- HTTP is an unsecure protocol, we adopt it just for an easily approach, but we strongly suggests to use a SSL certificate (can be a self-signed one) in way to use HTTPS.
+- It is crucial that the dataset used to build the matrix is representative, comprehensive, and free of attacks. The algorithm's performance largely depends on the quality of the dataset.
+
+- The only negative observation pertains to the energy consumption of Wi-Fi; Bluetooth is lighter and likely available on a greater number of vehicles.
+
+- HTTP is an insecure protocol; we adopt it for simplicity but strongly recommend using an SSL certificate (even a self-signed one) to enable HTTPS.
+
+
 
 ### Data of detection
 
-With the available datasets, the algorithm we replicated have detected many malicious messages, in numbers:
+We have set the `BATCH_SIZE` to `100`, the attack `THRESHOLD` to `0.05`, and the false-positive `THRESHOLD` to `0.02`. This means that if more than 5 percent of the messages in every 100-message batch do not appear in the original matrix, it is highly likely that an attack is in progress. If there are less than 5% but more than 2%, it is possible that an attack is occurring, but further investigation is needed. If it is less than 2%, they are flagged as false positives and subsequently ignored, updating the matrix.
 
-- 605'379 over 656'579 messages for **DoS attack** (numerically in line with a Denial of Service attack)
-- 21890 over 591'900 messages for **Fuzzy attack**
-- 18101 over 995'427 messages for **Impersonate attack**
+With the available datasets, the replicated algorithm detected numerous malicious messages:
+
+- 605,379 out of 656,579 messages for the DoS attack (numerically aligned with a Denial of Service attack).
+- 21,890 out of 591,900 messages for the Fuzzy attack.
+- 18,101 out of 995,427 messages for the Impersonate attack.
+
+It is notable that the DoS attack is more prominently detected, as it generates entirely random traffic with IDs that do not exist in the `Attack_free_dataset.txt`. On the other hand, the Fuzzy and Impersonate attacks are more challenging to detect, as they sometimes create traffic that is similar to the traffic present in the constructed matrix.
